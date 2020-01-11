@@ -11,9 +11,10 @@ Colori c = new Colori();
 void main() => runApp(new MaterialApp(
       theme:
           ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    ));
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      )
+    );
 
 class SplashScreen extends StatefulWidget {
   @override
