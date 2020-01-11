@@ -27,11 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
 
     super.initState();
-    Timer(Duration(seconds: 3), (){
-
-      print("Spash screen completed");
-
-      Navigator.push(
+    Timer(Duration(milliseconds: 275), (){
+      Navigator.pushReplacement(
         context, 
         MaterialPageRoute(
           builder: (context) => Home()
