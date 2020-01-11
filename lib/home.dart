@@ -9,12 +9,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  int _page = 0;
+  GlobalKey _bottomNavigationKey = GlobalKey();
   Colori _c = new Colori();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
+        animationCurve: Curves.decelerate,
+        animationDuration: Duration(milliseconds: 500),
+        key: _bottomNavigationKey,
+        index: 1,
         color: Colors.white,
         backgroundColor: _c.getStartGradient(),
         items: <Widget>[
@@ -23,7 +29,9 @@ class _HomeState extends State<Home> {
           Icon(Icons.settings, size: 30),
         ],
         onTap: (index) {
-          //Handle button tap
+          setState(() {
+            _page = index;
+          });
         },
       ),
       body: Container(
