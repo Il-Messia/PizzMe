@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gradient_text/gradient_text.dart';
-import 'home.dart';
+import 'pages/pages.dart';
 import 'res/colori.dart';
 
 Colori c = new Colori();
 
 void main() => runApp(new MaterialApp(
       theme:
-          ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
+        ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       )
@@ -27,11 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
 
     super.initState();
-    Timer(Duration(milliseconds: 275), (){
+    Timer(Duration(milliseconds: 4750), (){
       Navigator.pushReplacement(
         context, 
         MaterialPageRoute(
-          builder: (context) => Home()
+          builder: (context) => Pages()
           )
         );
       }
