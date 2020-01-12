@@ -9,7 +9,21 @@ class _OtherPageState extends State<OtherPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Page not found')
+      margin: new EdgeInsets.only(
+        top: 25.0,
+        left: 15.0,
+        right: 15.0,
+        bottom: 20.0
+      ),
+      decoration: new BoxDecoration(
+        color: Colors.white,
+        borderRadius: new BorderRadius.all(
+          Radius.circular(15.0)
+        )
+      ),
+      child: Center(
+        child: Text('Page not found'),
+      ),
     );
   }
 }

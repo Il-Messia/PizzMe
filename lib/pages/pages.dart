@@ -4,6 +4,7 @@ import 'package:pizzme/pages/homePage.dart';
 import 'package:pizzme/pages/listPage.dart';
 import 'package:pizzme/pages/otherPage.dart';
 import 'package:pizzme/pages/settingPage.dart';
+import 'package:pizzme/res/values.dart';
 import '../res/colori.dart';
 
 class Pages extends StatefulWidget {
@@ -12,9 +13,11 @@ class Pages extends StatefulWidget {
 }
 
 class _PagesState extends State<Pages> {
-
   int _page = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
+
+  Values values = new Values();
+
   Colori _c = new Colori();
 
   final SettingPage _settingPage = new SettingPage();
@@ -23,20 +26,20 @@ class _PagesState extends State<Pages> {
   final OtherPage _otherPage = new OtherPage();
 
   Widget _showPage = new HomePage();
-  Widget _pageSelector(int page){
-    switch(page){
+  Widget _pageSelector(int page) {
+    switch (page) {
       case 0:
-            return _listPage;
-            break;
+        return _listPage;
+        break;
       case 1:
-            return _homePage;
-            break;
+        return _homePage;
+        break;
       case 2:
-            return _settingPage;
-            break;
+        return _settingPage;
+        break;
       default:
-            return _otherPage;
-            break;
+        return _otherPage;
+        break;
     }
   }
 
@@ -47,6 +50,7 @@ class _PagesState extends State<Pages> {
         animationCurve: Curves.decelerate,
         animationDuration: Duration(milliseconds: 450),
         key: _bottomNavigationKey,
+        height: values.getNavBarHeigth(),
         index: _page,
         color: Colors.white,
         backgroundColor: _c.getStartGradient(),
@@ -64,16 +68,14 @@ class _PagesState extends State<Pages> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-                      _c.getStartGradient(),
-                      _c.getEndGradient(),
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    tileMode: TileMode.clamp
-          )
-        ),
+            gradient: LinearGradient(
+                colors: [
+              _c.getStartGradient(),
+              _c.getEndGradient(),
+            ],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                tileMode: TileMode.clamp)),
         child: _showPage,
       ),
     );

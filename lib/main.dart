@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:pizzme/res/values.dart';
 import 'pages/pages.dart';
 import 'res/colori.dart';
 
@@ -23,11 +24,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  Values values = new Values();
+
   @override
   void initState() {
 
     super.initState();
-    Timer(Duration(milliseconds: 4750), (){
+    Timer(Duration(milliseconds: values.getSplashTime()), (){
       Navigator.pushReplacement(
         context, 
         MaterialPageRoute(
@@ -48,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             decoration: BoxDecoration(color: Colors.white),
             child: Container(
               margin: new EdgeInsets.only(
-                  top: 75.0, bottom: 25.0, right: 25.0, left: 25.0),
+                  top: values.getAndroidStatusBarHeigth(), bottom: 25.0, right: 25.0, left: 25.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     colors: [
