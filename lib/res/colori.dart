@@ -6,12 +6,16 @@ class Colori{
   Color _startGradient = new Color(0xFFFD4A1E);
   Color _endGradient = new Color(0xFFB01054);
 
-  Color _primaryColorLight = new Color(0xFFFFFFFF);
+  Color _lighThemePrimaryColorLight = new Color(0xFFFFFFFF);
+  Color _lighThemePrimaryColorDark = new Color(0xFFEBEBEB);
 
   Colori();
 
-  Color getPrimaryColorLight(){
-    return this._primaryColorLight;
+  Color getLighThemePrimaryColorLight(){
+    return this._lighThemePrimaryColorLight;
+  }
+  Color getLightThemePrimaryColorDark(){
+    return this._lighThemePrimaryColorDark;
   }
 
   Color getStartGradient(){

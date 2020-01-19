@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:flutter/services.dart';
 import 'pages/pages.dart';
 import 'res/colori.dart';
 
@@ -11,11 +12,10 @@ Colori c = new Colori();
 
 void main() => runApp(new MaterialApp(
       theme:
-        ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-      )
-    );
+          ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    ));
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -23,88 +23,72 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   Values values = new Values();
 
   @override
   void initState() {
-
     super.initState();
-    Timer(Duration(milliseconds: values.getSplashTime()), (){
+
+    Timer(Duration(milliseconds: values.getSplashTime()), () {
       Navigator.pushReplacement(
-        context, 
-        MaterialPageRoute(
-          builder: (context) => Pages()
-          )
-        );
-      }
-    );
+          context, MaterialPageRoute(builder: (context) => Pages()));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: c.getLighThemePrimaryColorLight(), 
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     return new Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: c.getPrimaryColorLight()),
+            decoration: BoxDecoration(color: c.getLighThemePrimaryColorLight()),
             child: Container(
               margin: new EdgeInsets.only(
-                  top: values.getAndroidStatusBarHeigth(), bottom: values.getSplashMargin(), right: values.getSplashMargin(), left: values.getSplashMargin()),
+                  top: values.getAndroidStatusBarHeigth(),
+                  bottom: values.getSplashMargin(),
+                  right: values.getSplashMargin(),
+                  left: values.getSplashMargin()),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [
-                      c.getStartGradient(),
-                      c.getEndGradient(),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    tileMode: TileMode.clamp),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    values.getExternalSplashRadius()
-                  )
-                ),
-                boxShadow: [
-                  new BoxShadow(
-                    color: Colors.black38,
-            blurRadius: 5.0,
-            spreadRadius: 5.0,
-            offset: Offset(
-              0,
-              2.5
-            )
-                  )
-                ]
-              ),
+                  gradient: LinearGradient(
+                      colors: [
+                        c.getStartGradient(),
+                        c.getEndGradient(),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      tileMode: TileMode.clamp),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(values.getExternalSplashRadius())),
+                  boxShadow: [
+                    new BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 5.0,
+                        spreadRadius: 5.0,
+                        offset: Offset(0, 2.5))
+                  ]),
               child: Container(
-                margin: EdgeInsets.all(
-                  values.getSplashWeight()
-                ),
+                margin: EdgeInsets.all(values.getSplashWeight()),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        values.getInternalSplashRadius()
-                        )
-                      )
-                    ),
+                        Radius.circular(values.getInternalSplashRadius()))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     GradientText(
                       'PizzMe',
                       gradient: LinearGradient(
-                        colors: [
-                          c.getStartGradient(), 
-                          c.getEndGradient()
-                        ],
+                        colors: [c.getStartGradient(), c.getEndGradient()],
                       ),
                       style: TextStyle(
-                        fontSize: 38.0,
-                        fontWeight: FontWeight.bold
-                      ),
+                          fontSize: 38.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     Padding(

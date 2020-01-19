@@ -6,6 +6,7 @@ import 'package:pizzme/pages/otherPage.dart';
 import 'package:pizzme/pages/settingPage.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:swipedetector/swipedetector.dart';
+import 'package:flutter/services.dart';
 import '../res/colori.dart';
 
 class Pages extends StatefulWidget {
