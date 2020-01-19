@@ -5,6 +5,27 @@ class Values{
 
   int _splashTime = 4250;
 
+  double _splashMargin = 10.0;
+  double _splashWeight = 8.0;
+  double _externalSplashRadius = 30.0;
+  double _internalSplashRadius = 25.0;
+
+  double getSplashMargin(){
+    return this._splashMargin;
+  }
+
+  double getSplashWeight(){
+    return this._splashWeight;
+  }
+
+  double getExternalSplashRadius(){
+    return this._externalSplashRadius;
+  }
+
+  double getInternalSplashRadius(){
+    return this._internalSplashRadius;
+  }
+
   double getAndroidStatusBarHeigth(){
     return this._androidStatusBarHeigth;
   }

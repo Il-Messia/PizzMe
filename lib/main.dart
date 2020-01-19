@@ -48,10 +48,10 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: c.getPrimaryColorLight()),
             child: Container(
               margin: new EdgeInsets.only(
-                  top: values.getAndroidStatusBarHeigth(), bottom: 25.0, right: 25.0, left: 25.0),
+                  top: values.getAndroidStatusBarHeigth(), bottom: values.getSplashMargin(), right: values.getSplashMargin(), left: values.getSplashMargin()),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                     colors: [
@@ -61,13 +61,35 @@ class _SplashScreenState extends State<SplashScreen> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     tileMode: TileMode.clamp),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    values.getExternalSplashRadius()
+                  )
+                ),
+                boxShadow: [
+                  new BoxShadow(
+                    color: Colors.black38,
+            blurRadius: 5.0,
+            spreadRadius: 5.0,
+            offset: Offset(
+              0,
+              2.5
+            )
+                  )
+                ]
               ),
               child: Container(
-                margin: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(
+                  values.getSplashWeight()
+                ),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        values.getInternalSplashRadius()
+                        )
+                      )
+                    ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

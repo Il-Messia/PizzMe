@@ -5,6 +5,7 @@ import 'package:pizzme/pages/listPage.dart';
 import 'package:pizzme/pages/otherPage.dart';
 import 'package:pizzme/pages/settingPage.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:swipedetector/swipedetector.dart';
 import '../res/colori.dart';
 
 class Pages extends StatefulWidget {
@@ -76,7 +77,25 @@ class _PagesState extends State<Pages> {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 tileMode: TileMode.clamp)),
-        child: _showPage,
+        child: SwipeDetector(
+          child: _showPage,
+          onSwipeLeft: (){
+            if(_page < 2){
+              setState(() {
+                _page++;
+                _showPage = _pageSelector(_page);
+              });
+            }
+          },
+          onSwipeRight: (){
+            if(_page > 0){
+              setState(() {
+                _page--;
+                _showPage = _pageSelector(_page);
+              });
+            }
+          },
+        ),
       ),
     );
   }

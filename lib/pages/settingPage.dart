@@ -180,6 +180,7 @@ class _SettingPageState extends State<SettingPage> {
   _launchURL() async {
   const url = 'https://github.com/Il-Messia/PizzMe';
   if (await canLaunch(url)) {
+    print("Opening url");
     await launch(url);
   } else {
     throw 'Could not launch $url';

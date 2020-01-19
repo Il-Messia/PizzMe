@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class ListPage extends StatefulWidget {
   @override

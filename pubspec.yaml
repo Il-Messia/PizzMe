@@ -26,6 +26,7 @@ dependencies:
   curved_navigation_bar: ^0.3.1
   gradient_text: ^1.0.2
   url_launcher: ^5.4.1
+  swipedetector: ^1.2.0
 
 dev_dependencies:
   flutter_test:
