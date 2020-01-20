@@ -9,6 +9,10 @@ class Colori{
   Color _lighThemePrimaryColorLight = new Color(0xFFFFFFFF);
   Color _lighThemePrimaryColorDark = new Color(0xFFEBEBEB);
 
+  Color _darkThemePrimaryColorMedium = new Color(0xFF1E2129);
+  Color _darkThemePrimaryColorDark = new Color(0xFF171A23);
+  Color _darkThemePrimaryColorLight = new Color(0xFF2F313E);
+
   Colori();
 
   Color getLighThemePrimaryColorLight(){
@@ -16,6 +20,16 @@ class Colori{
   }
   Color getLightThemePrimaryColorDark(){
     return this._lighThemePrimaryColorDark;
+  }
+
+  Color getDarkThemePrimaryColorMedium(){
+    return this._darkThemePrimaryColorMedium;
+  }
+  Color getDarkThemePrimaryColorLight(){
+    return this._darkThemePrimaryColorLight;
+  }
+  Color getDarkThemePrimaryColorDark(){
+    return this._darkThemePrimaryColorDark;
   }
 
   Color getStartGradient(){
