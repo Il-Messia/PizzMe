@@ -40,6 +40,7 @@ class _SettingPageState extends State<SettingPage> {
         child: Column(
           children: <Widget>[
             Card(
+              margin: new EdgeInsets.only(top: 10.0, left : 5.0, right: 5.0),
               color: _switched ? _c.getDarkThemePrimaryColorLight():  _c.getLightThemePrimaryColorDark(),
               child: Row(
                 children: <Widget>[
