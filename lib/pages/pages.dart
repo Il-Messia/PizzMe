@@ -5,8 +5,8 @@ import 'package:pizzme/pages/listPage.dart';
 import 'package:pizzme/pages/otherPage.dart';
 import 'package:pizzme/pages/settingPage.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipedetector/swipedetector.dart';
-import 'package:flutter/services.dart';
 import '../res/colori.dart';
 
 class Pages extends StatefulWidget {
@@ -15,6 +15,37 @@ class Pages extends StatefulWidget {
 }
 
 class _PagesState extends State<Pages> {
+
+bool _dark = false;
+
+  Future<bool> _getIntFromShared() async{
+    final shared = await SharedPreferences.getInstance();
+    final result = shared.getBool(values.getKeyTheme());
+    if(result == null){
+      print("First time startUp");
+      this.setDefaultTheme();
+    }else{
+      setState(() {
+        _dark = result;
+      });
+      return result;
+    }
+    return result;
+  }
+
+  Future<void> setDefaultTheme() async{
+    final shared = await SharedPreferences.getInstance();
+    await shared.setBool(values.getKeyTheme(), false);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+
+    this._getIntFromShared();
+
+  }
+
   int _page = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
 
@@ -54,12 +85,12 @@ class _PagesState extends State<Pages> {
         key: _bottomNavigationKey,
         height: values.getNavBarHeigth(),
         index: _page,
-        color: Colors.white,
+        color: _dark ? _c.getDarkThemePrimaryColorDark(): _c.getLighThemePrimaryColorLight(),
         backgroundColor: _c.getStartGradient(),
         items: <Widget>[
-          Icon(Icons.list, size: 30, color: Colors.black),
-          Icon(Icons.home, size: 30, color: Colors.black),
-          Icon(Icons.settings, size: 30, color: Colors.black),
+          Icon(Icons.list, size: 30, color: _dark ? Colors.white:Colors.black),
+          Icon(Icons.home, size: 30, color: _dark ? Colors.white:Colors.black),
+          Icon(Icons.settings, size: 30, color: _dark ? Colors.white:Colors.black),
         ],
         onTap: (index) {
           setState(() {

@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/pages.dart';
 import 'res/colori.dart';
 
@@ -24,10 +25,34 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Values values = new Values();
+  
+  bool _dark = false;
+
+  Future<bool> _getIntFromShared() async{
+    final shared = await SharedPreferences.getInstance();
+    final result = shared.getBool(values.getKeyTheme());
+    if(result == null){
+      print("First time startUp");
+      this.setDefaultTheme();
+    }else{
+      setState(() {
+        _dark = result;
+      });
+      return result;
+    }
+    return result;
+  }
+
+  Future<void> setDefaultTheme() async{
+    final shared = await SharedPreferences.getInstance();
+    await shared.setBool(values.getKeyTheme(), false);
+  }
 
   @override
   void initState() {
     super.initState();
+
+    this._getIntFromShared();
 
     Timer(Duration(milliseconds: values.getSplashTime()), () {
       Navigator.pushReplacement(
@@ -38,8 +63,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: c.getLighThemePrimaryColorLight(), 
-      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: _dark ? c.getDarkThemePrimaryColorDark():  c.getLightThemePrimaryColorDark(), 
+      systemNavigationBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
@@ -48,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: c.getLighThemePrimaryColorLight()),
+            decoration: BoxDecoration(color: _dark ? c.getDarkThemePrimaryColorDark():  c.getLightThemePrimaryColorDark()),
             child: Container(
               margin: new EdgeInsets.only(
                   top: values.getAndroidStatusBarHeigth(),
@@ -76,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(
                 margin: EdgeInsets.all(values.getSplashWeight()),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: _dark ? c.getDarkThemePrimaryColorMedium():  c.getLightThemePrimaryColorDark(),
                     borderRadius: BorderRadius.all(
                         Radius.circular(values.getInternalSplashRadius()))),
                 child: Column(

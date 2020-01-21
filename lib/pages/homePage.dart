@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +11,37 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   Values values = new Values();
+
+  bool _dark = false;
+  Colori _c = new Colori();
+
+  Future<bool> _getIntFromShared() async{
+    final shared = await SharedPreferences.getInstance();
+    final result = shared.getBool(values.getKeyTheme());
+    if(result == null){
+      print("First time startUp");
+      this.setDefaultTheme();
+    }else{
+      setState(() {
+        _dark = result;
+      });
+      return result;
+    }
+    return result;
+  }
+
+  Future<void> setDefaultTheme() async{
+    final shared = await SharedPreferences.getInstance();
+    await shared.setBool(values.getKeyTheme(), false);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+
+    this._getIntFromShared();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         bottom: 20.0
       ),
       decoration: new BoxDecoration(
-        color: Colors.white,
+        color: _dark ? _c.getDarkThemePrimaryColorDark(): _c.getLighThemePrimaryColorLight(),
         borderRadius: new BorderRadius.all(
           Radius.circular(15.0)
         ),

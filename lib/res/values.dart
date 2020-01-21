@@ -1,4 +1,7 @@
 class Values{
+
+  String _keyTheme = "THEME";
+
   double _androidStatusBarHeigth = 25.0;
   double _navBarHeigth = 60.0;
   double _avatarRadius = 65.0;
@@ -9,6 +12,10 @@ class Values{
   double _splashWeight = 8.0;
   double _externalSplashRadius = 30.0;
   double _internalSplashRadius = 25.0;
+
+  String getKeyTheme(){
+    return this._keyTheme;
+  }
 
   double getSplashMargin(){
     return this._splashMargin;
