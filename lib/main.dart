@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
       systemNavigationBarColor: _dark ? c.getDarkThemePrimaryColorDark():  c.getLightThemePrimaryColorDark(), 
       systemNavigationBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
     ));
     return new Scaffold(
       body: Stack(

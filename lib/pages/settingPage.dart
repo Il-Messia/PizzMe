@@ -60,9 +60,9 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: _dark ? _c.getDarkThemePrimaryColorDark():  _c.getLightThemePrimaryColorDark(), 
+      systemNavigationBarColor: _dark ? _c.getDarkThemePrimaryColorDark():  _c.getLighThemePrimaryColorLight(), 
       systemNavigationBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
     ));
     return Container(
       margin: new EdgeInsets.only(
@@ -84,8 +84,11 @@ class _SettingPageState extends State<SettingPage> {
         child: Column(
           children: <Widget>[
             Card(
-              margin: new EdgeInsets.only(top: 10.0, left : 5.0, right: 5.0),
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLightThemePrimaryColorDark(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              margin: new EdgeInsets.only(top: 5.0, left : 5.0, right: 5.0, bottom: 5.0),
+              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
               child: Row(
                 children: <Widget>[
                   Column(
@@ -121,7 +124,10 @@ class _SettingPageState extends State<SettingPage> {
               ),
             ),
             Card(
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLightThemePrimaryColorDark(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
               child: Row(
                 children: <Widget>[
                   Column(
@@ -144,7 +150,10 @@ class _SettingPageState extends State<SettingPage> {
               ),
             ),
             Card(
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLightThemePrimaryColorDark(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
               child: Row(
                 children: <Widget>[
                   Column(
@@ -185,7 +194,10 @@ class _SettingPageState extends State<SettingPage> {
               ),
             ),
             Card(
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLightThemePrimaryColorDark(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
               child: Row(
                 children: <Widget>[
                   Column(

@@ -16,9 +16,17 @@ class Pages extends StatefulWidget {
 
 class _PagesState extends State<Pages> {
 
-bool _dark = false;
+  bool _dark = false;
+  int _page = 1;
+  GlobalKey _bottomNavigationKey = GlobalKey();
 
-  Future<bool> _getIntFromShared() async{
+  Values values = new Values();
+
+  Colori _c = new Colori();
+
+  Color _c1, _c2, _c3;
+
+  Future<bool> _getIntFromShared()async{
     final shared = await SharedPreferences.getInstance();
     final result = shared.getBool(values.getKeyTheme());
     if(result == null){
@@ -44,14 +52,9 @@ bool _dark = false;
 
     this._getIntFromShared();
 
+    _c2 = _c.getEndGradient();
+
   }
-
-  int _page = 1;
-  GlobalKey _bottomNavigationKey = GlobalKey();
-
-  Values values = new Values();
-
-  Colori _c = new Colori();
 
   final SettingPage _settingPage = new SettingPage();
   final HomePage _homePage = new HomePage();
@@ -60,14 +63,39 @@ bool _dark = false;
 
   Widget _showPage = new HomePage();
   Widget _pageSelector(int page) {
+    this._getIntFromShared();
     switch (page) {
       case 0:
+        setState(() {
+          _c1 = _c.getStartGradient();
+          if(_dark){
+            _c2 = _c3 = Colors.white;
+          }else{
+            _c2 = _c3 = Colors.black;
+          }
+        });
         return _listPage;
         break;
       case 1:
+        setState(() {
+          _c2 = _c.getStartGradient();
+          if(_dark){
+            _c1 = _c3 = Colors.white;
+          }else{
+            _c1 = _c3 = Colors.black;
+          }
+        });
         return _homePage;
         break;
       case 2:
+        setState(() {
+          _c3 = _c.getStartGradient();
+          if(_dark){
+            _c2 = _c1 = Colors.white;
+          }else{
+            _c2 = _c1 = Colors.black;
+          }
+        });
         return _settingPage;
         break;
       default:
@@ -88,9 +116,10 @@ bool _dark = false;
         color: _dark ? _c.getDarkThemePrimaryColorDark(): _c.getLighThemePrimaryColorLight(),
         backgroundColor: _c.getStartGradient(),
         items: <Widget>[
-          Icon(Icons.list, size: 30, color: _dark ? Colors.white:Colors.black),
-          Icon(Icons.home, size: 30, color: _dark ? Colors.white:Colors.black),
-          Icon(Icons.settings, size: 30, color: _dark ? Colors.white:Colors.black),
+          //provare a cambiare colore
+          Icon(Icons.list, size: 30, color: _c1),
+          Icon(Icons.home, size: 30, color: _c2),
+          Icon(Icons.settings, size: 30, color: _c3),
         ],
         onTap: (index) {
           setState(() {
