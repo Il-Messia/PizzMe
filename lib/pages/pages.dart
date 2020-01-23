@@ -52,7 +52,13 @@ class _PagesState extends State<Pages> {
 
     this._getIntFromShared();
 
-    _c2 = _c.getEndGradient();
+    if(_dark){
+            _c2 = _c.getEndGradient();
+            _c1 = _c3 = Colors.white;
+          }else{
+            _c2 = _c.getStartGradient();
+            _c1 = _c3 = Colors.black;
+          }
 
   }
 
@@ -67,10 +73,11 @@ class _PagesState extends State<Pages> {
     switch (page) {
       case 0:
         setState(() {
-          _c1 = _c.getStartGradient();
           if(_dark){
+            _c1 = _c.getEndGradient();
             _c2 = _c3 = Colors.white;
           }else{
+            _c1 = _c.getStartGradient();
             _c2 = _c3 = Colors.black;
           }
         });
@@ -78,10 +85,11 @@ class _PagesState extends State<Pages> {
         break;
       case 1:
         setState(() {
-          _c2 = _c.getStartGradient();
           if(_dark){
+            _c2 = _c.getEndGradient();
             _c1 = _c3 = Colors.white;
           }else{
+            _c2 = _c.getStartGradient();
             _c1 = _c3 = Colors.black;
           }
         });
@@ -89,10 +97,11 @@ class _PagesState extends State<Pages> {
         break;
       case 2:
         setState(() {
-          _c3 = _c.getStartGradient();
           if(_dark){
+            _c3 = _c.getEndGradient();
             _c2 = _c1 = Colors.white;
           }else{
+            _c3 = _c.getStartGradient();
             _c2 = _c1 = Colors.black;
           }
         });

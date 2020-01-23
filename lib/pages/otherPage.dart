@@ -10,7 +10,6 @@ class _OtherPageState extends State<OtherPage> {
   Widget build(BuildContext context) {
     return Container(
       margin: new EdgeInsets.only(
-        top: 25.0,
         left: 15.0,
         right: 15.0,
         bottom: 20.0
