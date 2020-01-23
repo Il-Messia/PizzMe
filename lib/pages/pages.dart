@@ -139,7 +139,9 @@ class _PagesState extends State<Pages> {
                 end: Alignment.topCenter,
                 tileMode: TileMode.clamp)),
         child: SwipeDetector(
-          child: _showPage,
+          child: SafeArea(
+            child: _showPage,
+          ),
           onSwipeLeft: (){
             if(_page < 2){
               setState(() {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "266245182488",
+    "firebase_url": "https://pizzmedb.firebaseio.com",
+    "project_id": "pizzmedb",
+    "storage_bucket": "pizzmedb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266245182488:android:6a8185d9a234c5ef821f6d",
+        "android_client_info": {
+          "package_name": "com.themessiah.pizzme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266245182488-ppa1r470a4of1d196317lefc6i6mr3dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6x7h5r3u6TZY02Bz2ySw1WyJx7nVl3qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266245182488-ppa1r470a4of1d196317lefc6i6mr3dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
