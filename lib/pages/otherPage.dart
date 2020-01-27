@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizzme/res/colori.dart';
 
 class OtherPage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _OtherPageState extends State<OtherPage> {
         bottom: 20.0
       ),
       decoration: new BoxDecoration(
-        color: Colors.white,
+        color: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark,
         borderRadius: new BorderRadius.all(
           Radius.circular(15.0)
         )

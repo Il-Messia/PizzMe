@@ -3,41 +3,16 @@ import 'package:flutter/material.dart';
 
 class Colori{
 
-  Color _startGradient = new Color(0xFFFD4A1E);
-  Color _endGradient = new Color(0xFFB01054);
+  static bool darkTheme = false;
 
-  Color _lighThemePrimaryColorLight = new Color(0xFFFFFFFF);
-  Color _lighThemePrimaryColorDark = new Color(0xFFEBEBEB);
+  static Color startGradient = new Color(0xFFFD4A1E);
+  static Color endGradient = new Color(0xFFB01054);
 
-  Color _darkThemePrimaryColorMedium = new Color(0xFF1E2129);
-  Color _darkThemePrimaryColorDark = new Color(0xFF171A23);
-  Color _darkThemePrimaryColorLight = new Color(0xFF2F313E);
+  static Color lightThemePrimaryColorLight = new Color(0xFFFFFFFF);
+  static Color lightThemePrimaryColorDark = new Color(0xFFEBEBEB);
 
-  Colori();
-
-  Color getLighThemePrimaryColorLight(){
-    return this._lighThemePrimaryColorLight;
-  }
-  Color getLightThemePrimaryColorDark(){
-    return this._lighThemePrimaryColorDark;
-  }
-
-  Color getDarkThemePrimaryColorMedium(){
-    return this._darkThemePrimaryColorMedium;
-  }
-  Color getDarkThemePrimaryColorLight(){
-    return this._darkThemePrimaryColorLight;
-  }
-  Color getDarkThemePrimaryColorDark(){
-    return this._darkThemePrimaryColorDark;
-  }
-
-  Color getStartGradient(){
-    return this._startGradient;
-  }
-
-  Color getEndGradient(){
-    return this._endGradient;
-  }
+  static Color darkThemePrimaryColorMedium = new Color(0xFF1E2129);
+  static Color darkThemePrimaryColorDark = new Color(0xFF171A23);
+  static Color darkThemePrimaryColorLight = new Color(0xFF2F313E);
 
 }

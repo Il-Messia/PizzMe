@@ -9,8 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/pages.dart';
 import 'res/colori.dart';
 
-Colori c = new Colori();
-
 void main() => runApp(new MaterialApp(
       theme:
           ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
@@ -24,19 +22,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Values values = new Values();
   
-  bool _dark = false;
-
+  Values values = new Values();
   Future<bool> _getIntFromShared() async{
     final shared = await SharedPreferences.getInstance();
     final result = shared.getBool(values.getKeyTheme());
     if(result == null){
-      print("First time startUp");
       this.setDefaultTheme();
     }else{
       setState(() {
-        _dark = result;
+        Colori.darkTheme = result;
       });
       return result;
     }
@@ -63,17 +58,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: _dark ? c.getDarkThemePrimaryColorDark():  c.getLightThemePrimaryColorDark(), 
-      systemNavigationBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark, 
+      systemNavigationBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
     ));
     return new Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: _dark ? c.getDarkThemePrimaryColorDark():  c.getLightThemePrimaryColorDark()),
+            decoration: BoxDecoration(color: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark),
             child: Container(
               margin: new EdgeInsets.only(
                   top: values.getAndroidStatusBarHeigth(),
@@ -83,8 +78,8 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        c.getStartGradient(),
-                        c.getEndGradient(),
+                        Colori.startGradient,
+                        Colori.endGradient,
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -101,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(
                 margin: EdgeInsets.all(values.getSplashWeight()),
                 decoration: BoxDecoration(
-                    color: _dark ? c.getDarkThemePrimaryColorMedium():  c.getLightThemePrimaryColorDark(),
+                    color: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark,
                     borderRadius: BorderRadius.all(
                         Radius.circular(values.getInternalSplashRadius()))),
                 child: Column(
@@ -110,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     GradientText(
                       'PizzMe',
                       gradient: LinearGradient(
-                        colors: [c.getStartGradient(), c.getEndGradient()],
+                        colors: [Colori.startGradient, Colori.endGradient],
                       ),
                       style: TextStyle(
                           fontSize: 38.0, fontWeight: FontWeight.bold),

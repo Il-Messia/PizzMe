@@ -5,7 +5,6 @@ import 'package:pizzme/pages/listPage.dart';
 import 'package:pizzme/pages/otherPage.dart';
 import 'package:pizzme/pages/settingPage.dart';
 import 'package:pizzme/res/values.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipedetector/swipedetector.dart';
 import '../res/colori.dart';
 
@@ -15,48 +14,22 @@ class Pages extends StatefulWidget {
 }
 
 class _PagesState extends State<Pages> {
-
-  bool _dark = false;
   int _page = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   Values values = new Values();
 
-  Colori _c = new Colori();
-
   Color _c1, _c2, _c3;
-
-  Future<bool> _getIntFromShared()async{
-    final shared = await SharedPreferences.getInstance();
-    final result = shared.getBool(values.getKeyTheme());
-    if(result == null){
-      print("First time startUp");
-      this.setDefaultTheme();
-    }else{
-      setState(() {
-        _dark = result;
-      });
-      return result;
-    }
-    return result;
-  }
-
-  Future<void> setDefaultTheme() async{
-    final shared = await SharedPreferences.getInstance();
-    await shared.setBool(values.getKeyTheme(), false);
-  }
 
   @override
   void initState(){
     super.initState();
 
-    this._getIntFromShared();
-
-    if(_dark){
-            _c2 = _c.getEndGradient();
+    if(Colori.darkTheme){
+            _c2 = Colori.endGradient;
             _c1 = _c3 = Colors.white;
           }else{
-            _c2 = _c.getStartGradient();
+            _c2 = Colori.startGradient;
             _c1 = _c3 = Colors.black;
           }
 
@@ -69,15 +42,14 @@ class _PagesState extends State<Pages> {
 
   Widget _showPage = new HomePage();
   Widget _pageSelector(int page) {
-    this._getIntFromShared();
     switch (page) {
       case 0:
         setState(() {
-          if(_dark){
-            _c1 = _c.getEndGradient();
+          if(Colori.darkTheme){
+            _c1 = Colori.endGradient;
             _c2 = _c3 = Colors.white;
           }else{
-            _c1 = _c.getStartGradient();
+            _c1 = Colori.startGradient;
             _c2 = _c3 = Colors.black;
           }
         });
@@ -85,11 +57,11 @@ class _PagesState extends State<Pages> {
         break;
       case 1:
         setState(() {
-          if(_dark){
-            _c2 = _c.getEndGradient();
+          if(Colori.darkTheme){
+            _c2 = Colori.endGradient;
             _c1 = _c3 = Colors.white;
           }else{
-            _c2 = _c.getStartGradient();
+            _c2 = Colori.startGradient;
             _c1 = _c3 = Colors.black;
           }
         });
@@ -97,11 +69,11 @@ class _PagesState extends State<Pages> {
         break;
       case 2:
         setState(() {
-          if(_dark){
-            _c3 = _c.getEndGradient();
+          if(Colori.darkTheme){
+            _c3 = Colori.endGradient;
             _c2 = _c1 = Colors.white;
           }else{
-            _c3 = _c.getStartGradient();
+            _c3 = Colori.startGradient;
             _c2 = _c1 = Colors.black;
           }
         });
@@ -122,8 +94,8 @@ class _PagesState extends State<Pages> {
         key: _bottomNavigationKey,
         height: values.getNavBarHeigth(),
         index: _page,
-        color: _dark ? _c.getDarkThemePrimaryColorDark(): _c.getLighThemePrimaryColorLight(),
-        backgroundColor: _c.getStartGradient(),
+        color:Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorLight,
+        backgroundColor: Colori.startGradient,
         items: <Widget>[
           //provare a cambiare colore
           Icon(Icons.list, size: 30, color: _c1),
@@ -141,8 +113,8 @@ class _PagesState extends State<Pages> {
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [
-              _c.getStartGradient(),
-              _c.getEndGradient(),
+              Colori.startGradient,
+              Colori.endGradient,
             ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,

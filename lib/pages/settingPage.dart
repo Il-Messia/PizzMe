@@ -11,20 +11,14 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  Colori _c = new Colori();
   Values values = new Values();
 
   String _name = "Name";
 
   int _ordinazioni = 0;
-
-  bool _dark = false;
-
   @override
   void initState() {
     super.initState();
-
-    this._getIntFromShared();
   }
 
   Future<bool> _getIntFromShared() async{
@@ -35,7 +29,7 @@ class _SettingPageState extends State<SettingPage> {
       this.setDefaultTheme();
     }else{
       setState(() {
-        _dark = result;
+        Colori.darkTheme = result;
       });
     }
     return result;
@@ -45,7 +39,7 @@ class _SettingPageState extends State<SettingPage> {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), false);
     setState(() {
-      _dark = false;
+      Colori.darkTheme = false;
     });
   }
 
@@ -53,16 +47,16 @@ class _SettingPageState extends State<SettingPage> {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), true);
     setState(() {
-      _dark = true;
+      Colori.darkTheme = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: _dark ? _c.getDarkThemePrimaryColorDark():  _c.getLighThemePrimaryColorLight(), 
-      systemNavigationBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness: _dark ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorLight, 
+      systemNavigationBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
     ));
     return Container(
       margin: new EdgeInsets.only(
@@ -70,7 +64,7 @@ class _SettingPageState extends State<SettingPage> {
           right: 15.0,
           bottom: 20.0),
       decoration: new BoxDecoration(
-          color: _dark ? _c.getDarkThemePrimaryColorMedium():  _c.getLightThemePrimaryColorDark(),
+          color: Colori.darkTheme ? Colori.darkThemePrimaryColorMedium:  Colori.lightThemePrimaryColorDark,
           borderRadius: new BorderRadius.all(Radius.circular(15.0)),
           boxShadow: [
             new BoxShadow(
@@ -87,7 +81,7 @@ class _SettingPageState extends State<SettingPage> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               margin: new EdgeInsets.only(top: 5.0, left : 5.0, right: 5.0, bottom: 5.0),
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
+              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
                   Column(
@@ -111,7 +105,7 @@ class _SettingPageState extends State<SettingPage> {
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                               fontSize: 35.0,
-                              color: _dark? Colors.white:Colors.black,
+                              color: Colori.darkTheme ? Colors.white:Colors.black,
                               fontFamily: 'Roboto',
                             ),
                           ),
@@ -126,7 +120,7 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
+              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
                   Column(
@@ -138,7 +132,7 @@ class _SettingPageState extends State<SettingPage> {
                           'Ordinazioni effettuate: $_ordinazioni',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color: _dark? Colors.white:Colors.black,
+                            color: Colori.darkTheme ? Colors.white:Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -152,7 +146,7 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
+              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
                   Column(
@@ -164,7 +158,7 @@ class _SettingPageState extends State<SettingPage> {
                           'Tema scuro',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color: _dark? Colors.white:Colors.black,
+                            color: Colori.darkTheme ? Colors.white:Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -176,7 +170,7 @@ class _SettingPageState extends State<SettingPage> {
                       Container(
                           margin: new EdgeInsets.only(left: 20.0),
                           child: Switch(
-                            value: _dark,
+                            value: Colori.darkTheme,
                             onChanged: (value) {
                               if(value){
                                 this.setDarkTheme();
@@ -184,8 +178,8 @@ class _SettingPageState extends State<SettingPage> {
                                 this.setDefaultTheme();
                               }
                             },
-                            activeTrackColor: _c.getStartGradient(),
-                            activeColor: _c.getEndGradient(),
+                            activeTrackColor: Colori.startGradient,
+                            activeColor: Colori.endGradient,
                           )),
                     ],
                   )
@@ -196,7 +190,7 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: _dark ? _c.getDarkThemePrimaryColorLight():  _c.getLighThemePrimaryColorLight(),
+              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
                   Column(
@@ -214,7 +208,7 @@ class _SettingPageState extends State<SettingPage> {
                             child: Text(
                               'Visualizza codice sorgente',
                               style: new TextStyle(
-                                color: _dark? Colors.white:Colors.black,
+                                color: Colori.darkTheme ? Colors.white:Colors.black,
                                   fontSize: 20.0, fontFamily: 'Roboto'),
                             ),
                           ),
