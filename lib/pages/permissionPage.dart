@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizzme/pages/pages.dart';
 import 'package:pizzme/res/colori.dart';
+import 'package:pizzme/res/values.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PermissionPage extends StatefulWidget {
@@ -9,6 +10,8 @@ class PermissionPage extends StatefulWidget {
 }
 
 class _PermissionPage extends State<PermissionPage> {
+  Values values = new Values();
+
   @override
   void initState() {
     super.initState();
@@ -55,13 +58,13 @@ class _PermissionPage extends State<PermissionPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor:
-          Colori.darkTheme ? Colori.endGradient : Colori.startGradient,
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
           Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Pages()));
+              context, MaterialPageRoute(builder: (context) => Pages()));
         },
+        backgroundColor:
+            Colori.darkTheme ? Colori.endGradient : Colori.startGradient,
         child: new Icon(
           Icons.skip_next,
           color: Colors.white,
@@ -69,27 +72,30 @@ class _PermissionPage extends State<PermissionPage> {
       ),
       body: new Container(
         decoration: new BoxDecoration(
-            gradient: LinearGradient(
-                colors: [
-                  Colori.startGradient,
-                  Colori.endGradient,
-                ],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                tileMode: TileMode.clamp),
-            borderRadius: new BorderRadius.all(Radius.circular(15.0)),
-            boxShadow: [
-              new BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 5.0,
-                  spreadRadius: 5.0,
-                  offset: Offset(5.0, 5.0))
-            ]),
+          gradient: LinearGradient(
+              colors: [
+                Colori.startGradient,
+                Colori.endGradient,
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              tileMode: TileMode.clamp),
+        ),
         child: new SafeArea(
           child: new Container(
-            color: Colori.darkTheme
-                ? Colori.darkThemePrimaryColorDark
-                : Colori.lightThemePrimaryColorDark,
+            decoration: new BoxDecoration(
+                color: Colori.darkTheme
+                    ? Colori.darkThemePrimaryColorDark
+                    : Colori.lightThemePrimaryColorDark,
+                borderRadius: BorderRadius.all(
+                    Radius.circular(values.getExternalSplashRadius())),
+                boxShadow: [
+                  new BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 5.0,
+                      spreadRadius: 5.0,
+                      offset: Offset(0, 2.5))
+                ]),
             margin: new EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
             child: new Column(
               children: <Widget>[
