@@ -2,6 +2,9 @@ class Values{
 
   String _keyTheme = "THEME";
 
+  String developerUrl = "https://www.instagram.com/__theexecutioner__";
+  String codeUrl = "https://github.com/Il-Messia/PizzMe";
+
   double _androidStatusBarHeigth = 25.0;
   double _navBarHeigth = 60.0;
   double _avatarRadius = 65.0;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,21 +22,7 @@ class _SettingPageState extends State<SettingPage> {
     super.initState();
   }
 
-  Future<bool> _getIntFromShared() async{
-    final shared = await SharedPreferences.getInstance();
-    final result = shared.getBool(values.getKeyTheme());
-    if(result == null){
-      print("First time startUp");
-      this.setDefaultTheme();
-    }else{
-      setState(() {
-        Colori.darkTheme = result;
-      });
-    }
-    return result;
-  }
-
-  Future<void> setDefaultTheme() async{
+  Future<void> setDefaultTheme() async {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), false);
     setState(() {
@@ -43,7 +30,7 @@ class _SettingPageState extends State<SettingPage> {
     });
   }
 
-  Future<void> setDarkTheme() async{
+  Future<void> setDarkTheme() async {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), true);
     setState(() {
@@ -51,20 +38,61 @@ class _SettingPageState extends State<SettingPage> {
     });
   }
 
+  void _showAlert() {
+    var alertStyle = AlertStyle(
+        backgroundColor: Colori.darkTheme
+            ? Colori.darkThemePrimaryColorDark
+            : Colori.lightThemePrimaryColorLight,
+        animationType: AnimationType.fromBottom,
+        alertBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            side: BorderSide(
+                color: Colori.darkTheme
+                    ? Colori.darkThemePrimaryColorDark
+                    : Colori.lightThemePrimaryColorLight)),
+        titleStyle:
+            TextStyle(color: Colori.darkTheme ? Colors.white : Colors.black),
+        descStyle:
+            TextStyle(color: Colori.darkTheme ? Colors.white : Colors.black));
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: "ATTENZIONE",
+      style: alertStyle,
+      desc:
+          "E' consigliato riavviare l'app o cambiare schermata per godere al massimo il tema!",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Okay",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          gradient: LinearGradient(
+              colors: [Colori.startGradient, Colori.endGradient]),
+          width: 120,
+        )
+      ],
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorLight, 
-      systemNavigationBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Colori.darkTheme
+          ? Colori.darkThemePrimaryColorDark
+          : Colori.lightThemePrimaryColorLight,
+      systemNavigationBarIconBrightness:
+          Colori.darkTheme ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness:
+          Colori.darkTheme ? Brightness.light : Brightness.dark,
     ));
     return Container(
-      margin: new EdgeInsets.only(
-          left: 15.0,
-          right: 15.0,
-          bottom: 20.0),
+      margin: new EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
       decoration: new BoxDecoration(
-          color: Colori.darkTheme ? Colori.darkThemePrimaryColorMedium:  Colori.lightThemePrimaryColorDark,
+          color: Colori.darkTheme
+              ? Colori.darkThemePrimaryColorMedium
+              : Colori.lightThemePrimaryColorDark,
           borderRadius: new BorderRadius.all(Radius.circular(15.0)),
           boxShadow: [
             new BoxShadow(
@@ -80,8 +108,11 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              margin: new EdgeInsets.only(top: 5.0, left : 5.0, right: 5.0, bottom: 5.0),
-              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
+              margin: new EdgeInsets.only(
+                  top: 5.0, left: 5.0, right: 5.0, bottom: 5.0),
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
                   Column(
@@ -105,7 +136,9 @@ class _SettingPageState extends State<SettingPage> {
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                               fontSize: 35.0,
-                              color: Colori.darkTheme ? Colors.white:Colors.black,
+                              color: Colori.darkTheme
+                                  ? Colors.white
+                                  : Colors.black,
                               fontFamily: 'Roboto',
                             ),
                           ),
@@ -120,9 +153,25 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Icon(
+                            Icons.fastfood,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                            size: 30.0,
+                          )),
+                    ],
+                  ),
                   Column(
                     children: <Widget>[
                       Container(
@@ -132,7 +181,8 @@ class _SettingPageState extends State<SettingPage> {
                           'Ordinazioni effettuate: $_ordinazioni',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color: Colori.darkTheme ? Colors.white:Colors.black,
+                            color:
+                                Colori.darkTheme ? Colors.white : Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -146,9 +196,25 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Icon(
+                            Icons.chrome_reader_mode,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                            size: 30.0,
+                          )),
+                    ],
+                  ),
                   Column(
                     children: <Widget>[
                       Container(
@@ -158,7 +224,8 @@ class _SettingPageState extends State<SettingPage> {
                           'Tema scuro',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color: Colori.darkTheme ? Colors.white:Colors.black,
+                            color:
+                                Colori.darkTheme ? Colors.white : Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -172,10 +239,12 @@ class _SettingPageState extends State<SettingPage> {
                           child: Switch(
                             value: Colori.darkTheme,
                             onChanged: (value) {
-                              if(value){
+                              if (value) {
                                 this.setDarkTheme();
-                              }else{
+                                this._showAlert();
+                              } else {
                                 this.setDefaultTheme();
+                                this._showAlert();
                               }
                             },
                             activeTrackColor: Colori.startGradient,
@@ -190,9 +259,25 @@ class _SettingPageState extends State<SettingPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Colori.darkTheme ? Colori.darkThemePrimaryColorLight:  Colori.lightThemePrimaryColorLight,
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
               child: Row(
                 children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Icon(
+                            Icons.code,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                            size: 30.0,
+                          )),
+                    ],
+                  ),
                   Column(
                     children: <Widget>[
                       Container(
@@ -203,13 +288,68 @@ class _SettingPageState extends State<SettingPage> {
                           width: 300.0,
                           child: GestureDetector(
                             onTap: () {
-                              _launchURL();
+                              _launchURL(values.codeUrl);
                             },
                             child: Text(
                               'Visualizza codice sorgente',
                               style: new TextStyle(
-                                color: Colori.darkTheme ? Colors.white:Colors.black,
-                                  fontSize: 20.0, fontFamily: 'Roboto'),
+                                  color: Colori.darkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 20.0,
+                                  fontFamily: 'Roboto'),
+                            ),
+                          ),
+                        )),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
+              child: Row(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Icon(
+                            Icons.account_box,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
+                            size: 30.0,
+                          )),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        margin: new EdgeInsets.only(
+                            top: 10.0, left: 20.0, bottom: 10.0),
+                        child: Center(
+                            child: SizedBox(
+                          width: 300.0,
+                          child: GestureDetector(
+                            onTap: () {
+                              _launchURL(values.developerUrl);
+                            },
+                            child: Text(
+                              'Sviluppatore',
+                              style: new TextStyle(
+                                  color: Colori.darkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 20.0,
+                                  fontFamily: 'Roboto'),
                             ),
                           ),
                         )),
@@ -225,8 +365,7 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  _launchURL() async {
-    const url = 'https://github.com/Il-Messia/PizzMe';
+  _launchURL(url) async {
     if (await canLaunch(url)) {
       print("Opening url");
       await launch(url);
