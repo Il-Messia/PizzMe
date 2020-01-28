@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:pizzme/pages/permissionPage.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'pages/pages.dart';
 import 'res/colori.dart';
 
 void main() => runApp(new MaterialApp(
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(milliseconds: values.getSplashTime()), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Pages()));
+          context, MaterialPageRoute(builder: (context) => PermissionPage()));
     });
   }
 

@@ -129,7 +129,7 @@ class _SettingPageState extends State<SettingPage> {
                   Column(
                     children: <Widget>[
                       Container(
-                        margin: new EdgeInsets.only(left: 30.0),
+                        margin: new EdgeInsets.only(left: 15.0),
                         child: Center(
                           child: Text(
                             _name,
@@ -165,9 +165,8 @@ class _SettingPageState extends State<SettingPage> {
                               top: 10.0, left: 20.0, bottom: 10.0),
                           child: Icon(
                             Icons.fastfood,
-                            color: Colori.darkTheme
-                                ? Colors.white
-                                : Colors.black,
+                            color:
+                                Colori.darkTheme ? Colors.white : Colors.black,
                             size: 30.0,
                           )),
                     ],
@@ -208,9 +207,8 @@ class _SettingPageState extends State<SettingPage> {
                               top: 10.0, left: 20.0, bottom: 10.0),
                           child: Icon(
                             Icons.chrome_reader_mode,
-                            color: Colori.darkTheme
-                                ? Colors.white
-                                : Colors.black,
+                            color:
+                                Colori.darkTheme ? Colors.white : Colors.black,
                             size: 30.0,
                           )),
                     ],
@@ -255,41 +253,39 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
             ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              color: Colori.darkTheme
-                  ? Colori.darkThemePrimaryColorLight
-                  : Colori.lightThemePrimaryColorLight,
-              child: Row(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
+            GestureDetector(
+              onTap: () {
+                _launchURL(values.codeUrl);
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                color: Colori.darkTheme
+                    ? Colori.darkThemePrimaryColorLight
+                    : Colori.lightThemePrimaryColorLight,
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
+                            margin: new EdgeInsets.only(
+                                top: 10.0, left: 20.0, bottom: 10.0),
+                            child: Icon(
+                              Icons.code,
+                              color: Colori.darkTheme
+                                  ? Colors.white
+                                  : Colors.black,
+                              size: 30.0,
+                            )),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Container(
                           margin: new EdgeInsets.only(
                               top: 10.0, left: 20.0, bottom: 10.0),
-                          child: Icon(
-                            Icons.code,
-                            color: Colori.darkTheme
-                                ? Colors.white
-                                : Colors.black,
-                            size: 30.0,
-                          )),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        margin: new EdgeInsets.only(
-                            top: 10.0, left: 20.0, bottom: 10.0),
-                        child: Center(
-                            child: SizedBox(
-                          width: 300.0,
-                          child: GestureDetector(
-                            onTap: () {
-                              _launchURL(values.codeUrl);
-                            },
+                          child: Center(
                             child: Text(
                               'Visualizza codice sorgente',
                               style: new TextStyle(
@@ -300,65 +296,69 @@ class _SettingPageState extends State<SettingPage> {
                                   fontFamily: 'Roboto'),
                             ),
                           ),
-                        )),
-                      ),
-                    ],
-                  )
-                ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              color: Colori.darkTheme
-                  ? Colori.darkThemePrimaryColorLight
-                  : Colori.lightThemePrimaryColorLight,
-              child: Row(
-                children: <Widget>[
-                  Column(
+            GestureDetector(
+                onTap: () {
+                  _launchURL(values.developerUrl);
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  color: Colori.darkTheme
+                      ? Colori.darkThemePrimaryColorLight
+                      : Colori.lightThemePrimaryColorLight,
+                  child: Row(
                     children: <Widget>[
-                      Container(
-                          margin: new EdgeInsets.only(
-                              top: 10.0, left: 20.0, bottom: 10.0),
-                          child: Icon(
-                            Icons.account_box,
-                            color: Colori.darkTheme
-                                ? Colors.white
-                                : Colors.black,
-                            size: 30.0,
-                          )),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                              margin: new EdgeInsets.only(
+                                  top: 10.0, left: 20.0, bottom: 10.0),
+                              child: Icon(
+                                Icons.account_box,
+                                color: Colori.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
+                                size: 30.0,
+                              )),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            margin: new EdgeInsets.only(
+                                top: 10.0, left: 20.0, bottom: 10.0),
+                            child: Center(
+                                child: SizedBox(
+                              //width: 300.0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  _launchURL(values.developerUrl);
+                                },
+                                child: Text(
+                                  'Sviluppatore',
+                                  style: new TextStyle(
+                                      color: Colori.darkTheme
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 20.0,
+                                      fontFamily: 'Roboto'),
+                                ),
+                              ),
+                            )),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        margin: new EdgeInsets.only(
-                            top: 10.0, left: 20.0, bottom: 10.0),
-                        child: Center(
-                            child: SizedBox(
-                          width: 300.0,
-                          child: GestureDetector(
-                            onTap: () {
-                              _launchURL(values.developerUrl);
-                            },
-                            child: Text(
-                              'Sviluppatore',
-                              style: new TextStyle(
-                                  color: Colori.darkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 20.0,
-                                  fontFamily: 'Roboto'),
-                            ),
-                          ),
-                        )),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            )
+                ))
           ],
         ),
       ),
