@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:pizzme/pages/pages.dart';
 import 'package:pizzme/pages/permissionPage.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
+import 'package:pizzme/util/permissionManager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'res/colori.dart';
 
@@ -22,14 +26,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
   Values values = new Values();
-  Future<bool> _getIntFromShared() async{
+  Future<bool> _getIntFromShared() async {
     final shared = await SharedPreferences.getInstance();
     final result = shared.getBool(values.getKeyTheme());
-    if(result == null){
+    if (result == null) {
       this.setDefaultTheme();
-    }else{
+    } else {
       setState(() {
         Colori.darkTheme = result;
       });
@@ -38,37 +41,75 @@ class _SplashScreenState extends State<SplashScreen> {
     return result;
   }
 
-  Future<void> setDefaultTheme() async{
+  Future<void> setDefaultTheme() async {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), false);
+  }
+
+  Future<bool> checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return true;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    } else {
+      Fluttertoast.showToast(
+          msg: "Rete sconnessa, connetti il tuo cellulare!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
+      return false;
+    }
   }
 
   @override
   void initState() {
     super.initState();
 
+    PermissionManager.init();
+
     this._getIntFromShared();
 
+    this.checkConnection();
+
     Timer(Duration(milliseconds: values.getSplashTime()), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => PermissionPage()));
+      if (PermissionManager.getPhoneStatus() &&
+          PermissionManager.getStorageStatus() && PermissionManager.getMessagesStatus()) {
+            print("Permessi concessi");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Pages()));
+      } else {
+        print("Permessi negati");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => PermissionPage()));
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark, 
-      systemNavigationBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Colori.darkTheme
+          ? Colori.darkThemePrimaryColorDark
+          : Colori.lightThemePrimaryColorDark,
+      systemNavigationBarIconBrightness:
+          Colori.darkTheme ? Brightness.light : Brightness.dark,
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Colori.darkTheme ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness:
+          Colori.darkTheme ? Brightness.light : Brightness.dark,
     ));
     return new Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(color: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark),
+            decoration: BoxDecoration(
+                color: Colori.darkTheme
+                    ? Colori.darkThemePrimaryColorDark
+                    : Colori.lightThemePrimaryColorDark),
             child: Container(
               margin: new EdgeInsets.only(
                   top: values.getAndroidStatusBarHeigth(),
@@ -96,7 +137,9 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Container(
                 margin: EdgeInsets.all(values.getSplashWeight()),
                 decoration: BoxDecoration(
-                    color: Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorDark,
+                    color: Colori.darkTheme
+                        ? Colori.darkThemePrimaryColorDark
+                        : Colori.lightThemePrimaryColorDark,
                     borderRadius: BorderRadius.all(
                         Radius.circular(values.getInternalSplashRadius()))),
                 child: Column(

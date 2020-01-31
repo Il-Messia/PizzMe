@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizzme/pages/pages.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:pizzme/util/permissionManager.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PermissionPage extends StatefulWidget {
