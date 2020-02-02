@@ -1,4 +1,4 @@
-import 'package:permission/permission.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PermissionManager{
   static bool _storage;
@@ -6,21 +6,44 @@ class PermissionManager{
   static bool _messages;
 
   static void init() async{
-    var temp = await Permission.getPermissionsStatus([PermissionName.SMS, PermissionName.Phone, PermissionName.Storage]);
-    if(temp[0].permissionStatus == PermissionStatus.deny || temp[0].permissionStatus == PermissionStatus.notAgain || temp[0].permissionStatus == PermissionStatus.notDecided) {
-      PermissionManager.setMessageStatus(false);
+    PermissionStatus smsStatus = await PermissionHandler().checkPermissionStatus(PermissionGroup.sms);
+    print(smsStatus);
+    PermissionStatus phoneStatus = await PermissionHandler().checkPermissionStatus(PermissionGroup.phone);
+    print(phoneStatus);
+    PermissionStatus storageStatus = await PermissionHandler().checkPermissionStatus(PermissionGroup.storage);
+    print(storageStatus);
+    if(smsStatus == PermissionStatus.denied || smsStatus == PermissionStatus.unknown){
+      _messages = false;
     }else{
-      PermissionManager.setMessageStatus(true);
+      _messages = true;
     }
-    if(temp[1].permissionStatus == PermissionStatus.deny || temp[1].permissionStatus == PermissionStatus.notAgain || temp[1].permissionStatus == PermissionStatus.notDecided){
-      PermissionManager.setPhoneStatus(false);
+    if(phoneStatus == PermissionStatus.denied || phoneStatus == PermissionStatus.unknown){
+      _phone = false;
     }else{
-      PermissionManager.setPhoneStatus(true);
+      _phone = true;
     }
-    if(temp[2].permissionStatus == PermissionStatus.deny || temp[2].permissionStatus == PermissionStatus.notAgain || temp[2].permissionStatus == PermissionStatus.notDecided || temp[2].permissionStatus == PermissionStatus.notAgain){
-      PermissionManager.setStorageStatus(false);
+    if(storageStatus == PermissionStatus.denied || storageStatus == PermissionStatus.unknown){
+      _storage = false;
     }else{
-      PermissionManager.setStorageStatus(true);
+      _storage = true;
+    }
+  }
+
+  static void askMessagesPermission() async{
+    if(!PermissionManager.getMessagesStatus()){
+      await PermissionHandler().requestPermissions([PermissionGroup.sms]);
+    }
+  }
+
+  static void askPhonePermission() async{
+    if(!PermissionManager.getPhoneStatus()){
+      await PermissionHandler().requestPermissions([PermissionGroup.phone]);
+    }
+  }
+
+  static void askStoragePermission() async{
+    if(!PermissionManager.getStorageStatus()){
+      await PermissionHandler().requestPermissions([PermissionGroup.storage]);
     }
   }
 

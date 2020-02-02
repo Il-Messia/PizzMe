@@ -77,8 +77,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(milliseconds: values.getSplashTime()), () {
       if (PermissionManager.getPhoneStatus() &&
-          PermissionManager.getStorageStatus() && PermissionManager.getMessagesStatus()) {
-            print("Permessi concessi");
+          PermissionManager.getStorageStatus() &&
+          PermissionManager.getMessagesStatus()) {
+        print("Permessi concessi");
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Pages()));
       } else {

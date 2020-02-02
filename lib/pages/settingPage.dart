@@ -165,8 +165,9 @@ class _SettingPageState extends State<SettingPage> {
                               top: 10.0, left: 20.0, bottom: 10.0),
                           child: Icon(
                             Icons.fastfood,
-                            color:
-                                Colori.darkTheme ? Colors.white : Colors.black,
+                            color: Colori.darkTheme
+                                ? Colori.endGradient
+                                : Colori.startGradient,
                             size: 30.0,
                           )),
                     ],
@@ -207,8 +208,9 @@ class _SettingPageState extends State<SettingPage> {
                               top: 10.0, left: 20.0, bottom: 10.0),
                           child: Icon(
                             Icons.chrome_reader_mode,
-                            color:
-                                Colori.darkTheme ? Colors.white : Colors.black,
+                            color: Colori.darkTheme
+                                ? Colori.endGradient
+                                : Colori.startGradient,
                             size: 30.0,
                           )),
                     ],
@@ -274,8 +276,8 @@ class _SettingPageState extends State<SettingPage> {
                             child: Icon(
                               Icons.code,
                               color: Colori.darkTheme
-                                  ? Colors.white
-                                  : Colors.black,
+                                  ? Colori.endGradient
+                                  : Colori.startGradient,
                               size: 30.0,
                             )),
                       ],
@@ -324,8 +326,8 @@ class _SettingPageState extends State<SettingPage> {
                               child: Icon(
                                 Icons.account_box,
                                 color: Colori.darkTheme
-                                    ? Colors.white
-                                    : Colors.black,
+                                    ? Colori.endGradient
+                                    : Colori.startGradient,
                                 size: 30.0,
                               )),
                         ],
