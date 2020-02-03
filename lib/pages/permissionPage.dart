@@ -78,6 +78,9 @@ class _PermissionPage extends State<PermissionPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       floatingActionButton: new FloatingActionButton(
+        elevation: 5.0,
+        focusColor: Colori.darkTheme ? Colori.startGradient : Colori.endGradient,
+        splashColor: Colori.darkTheme ? Colori.startGradient : Colori.endGradient,
         onPressed: () {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Pages()));
@@ -162,6 +165,7 @@ class _PermissionPage extends State<PermissionPage> {
                   ),
                   new GestureDetector(
                     onTap: () {
+                      this._refreshPermissionStatus();
                       if (PermissionManager.getStorageStatus()) {
                         this._showAlert(
                             "Storage", "Questo permesso è stato già concesso!");
@@ -169,6 +173,7 @@ class _PermissionPage extends State<PermissionPage> {
                         PermissionManager.askStoragePermission();
                         this._refreshPermissionStatus();
                         this._nextPage();
+                        PermissionManager.setStorageStatus(true);
                       }
                     },
                     child: new Card(
@@ -223,12 +228,14 @@ class _PermissionPage extends State<PermissionPage> {
                   new GestureDetector(
                     onTap: () {
                       if (PermissionManager.getPhoneStatus()) {
+                        this._refreshPermissionStatus();
                         this._showAlert(
                             "Phone", "Questo permesso è stato già concesso!");
                       } else {
                         PermissionManager.askPhonePermission();
                         this._refreshPermissionStatus();
                         this._nextPage();
+                        PermissionManager.setPhoneStatus(true);
                       }
                     },
                     child: new Card(
@@ -283,12 +290,14 @@ class _PermissionPage extends State<PermissionPage> {
                   new GestureDetector(
                     onTap: () {
                       if (PermissionManager.getMessagesStatus()) {
+                        this._refreshPermissionStatus();
                         this._showAlert(
                             "SMS", "Questo permesso è stato già concesso!");
                       } else {
                         PermissionManager.askMessagesPermission();
                         this._refreshPermissionStatus();
                         this._nextPage();
+                        PermissionManager.setMessageStatus(true);
                       }
                     },
                     child: new Card(

@@ -42,7 +42,12 @@ class _HomePageState extends State<HomePage> {
         ]
       ),
       child: Center(
-        child: Text('HomePage'),
+        child: Text('HomePage',
+        style: new TextStyle(
+              fontSize: 30.0,
+                        color: Colori.darkTheme ? Colors.white : Colors.black,
+                        fontFamily: 'Roboto',
+            )),
       ),
     );
   }

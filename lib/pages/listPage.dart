@@ -31,9 +31,16 @@ class _ListPageState extends State<ListPage> {
                 spreadRadius: 5.0,
                 offset: Offset(0.0, 5.0))
           ]),
-      child: Center(
-        child: Text('HomePage'),
-      ),
+      child: new Container(
+          child: new Center(child: Text(
+            'ListPage',
+            style: new TextStyle(
+              fontSize: 30.0,
+                        color: Colori.darkTheme ? Colors.white : Colors.black,
+                        fontFamily: 'Roboto',
+            )
+          ),)
+        )
     );
   }
 }
