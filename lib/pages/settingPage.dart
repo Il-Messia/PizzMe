@@ -100,7 +100,7 @@ class _SettingPageState extends State<SettingPage> {
             fontFamily: 'Roboto',
             fontSize: 30.0));
     Alert(
-      title: '',
+        title: '',
         type: AlertType.info,
         context: context,
         style: alertStyle,
@@ -112,16 +112,16 @@ class _SettingPageState extends State<SettingPage> {
                   icon: Icon(Icons.account_circle),
                   labelText: 'Nome: ',
                   hintText: 'Mario'),
-                  cursorColor: Colori.darkTheme ? Colors.white : Colors.black,
+              cursorColor: Colori.darkTheme ? Colors.white : Colors.black,
             ),
           ],
         ),
         buttons: [
           DialogButton(
-            onPressed: (){
-              if(nameController.text == ""){
+            onPressed: () {
+              if (nameController.text == "") {
                 this.setName('User');
-              }else{
+              } else {
                 this.setName(nameController.text);
               }
               Navigator.pop(context);
@@ -190,22 +190,22 @@ class _SettingPageState extends State<SettingPage> {
                       Container(
                         margin: new EdgeInsets.only(left: 15.0),
                         child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               this.showAlert('NOME');
                             },
                             child: Center(
-                          child: Text(
-                            UserData.name,
-                            textAlign: TextAlign.center,
-                            style: new TextStyle(
-                              fontSize: 35.0,
-                              color: Colori.darkTheme
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                        )),
+                              child: Text(
+                                UserData.name,
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                  fontSize: 35.0,
+                                  color: Colori.darkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontFamily: 'Roboto',
+                                ),
+                              ),
+                            )),
                       )
                     ],
                   )

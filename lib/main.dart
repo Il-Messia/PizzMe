@@ -9,6 +9,7 @@ import 'package:pizzme/pages/pages.dart';
 import 'package:pizzme/pages/permissionPage.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
+import 'package:pizzme/util/jsonManager.dart';
 import 'package:pizzme/util/permissionManager.dart';
 import 'package:pizzme/util/sharedManager.dart';
 import 'package:pizzme/util/userManager.dart';
@@ -58,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     PermissionManager.init();
     UserData.init();
+    //JsonManager.getStore();
 
     this.checkConnection();
 

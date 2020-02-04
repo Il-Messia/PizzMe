@@ -35,6 +35,7 @@ dependencies:
   connectivity: ^0.4.6+2
   permission_handler: ^4.2.0+hotfix.3
   flutter_sms: ^1.1.0
+  http: ^0.12.0+4
 
 dev_dependencies:
   flutter_test:

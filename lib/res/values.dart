@@ -1,11 +1,12 @@
-class Values{
-
+class Values {
   String _keyTheme = "THEME";
   String _keyName = "NAME";
   String _keyOrder = "ORDER";
 
   String developerUrl = "https://www.instagram.com/__theexecutioner__";
   String codeUrl = "https://github.com/Il-Messia/PizzMe";
+  String jsonUrl =
+      "https://github.com/Il-Messia/dataListPizzerie/blob/master/list.json";
 
   double _androidStatusBarHeigth = 25.0;
   double _navBarHeigth = 60.0;
@@ -18,42 +19,47 @@ class Values{
   double _externalSplashRadius = 30.0;
   double _internalSplashRadius = 25.0;
 
-  String getKeyTheme(){
+  String getKeyTheme() {
     return this._keyTheme;
   }
-  String getKeyName(){
+
+  String getKeyName() {
     return this._keyName;
   }
-  String getKeyOrder(){
+
+  String getKeyOrder() {
     return this._keyOrder;
   }
 
-  double getSplashMargin(){
+  double getSplashMargin() {
     return this._splashMargin;
   }
 
-  double getSplashWeight(){
+  double getSplashWeight() {
     return this._splashWeight;
   }
 
-  double getExternalSplashRadius(){
+  double getExternalSplashRadius() {
     return this._externalSplashRadius;
   }
 
-  double getInternalSplashRadius(){
+  double getInternalSplashRadius() {
     return this._internalSplashRadius;
   }
 
-  double getAndroidStatusBarHeigth(){
+  double getAndroidStatusBarHeigth() {
     return this._androidStatusBarHeigth;
   }
-  double getNavBarHeigth(){
+
+  double getNavBarHeigth() {
     return this._navBarHeigth;
   }
-  double getAvatarRadius(){
+
+  double getAvatarRadius() {
     return this._avatarRadius;
   }
-  int getSplashTime(){
+
+  int getSplashTime() {
     return this._splashTime;
   }
 }
