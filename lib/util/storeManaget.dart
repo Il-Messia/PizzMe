@@ -1,11 +1,11 @@
 class StoreManager {
-  int _index;
-  String _name;
-  String _phone;
-  String _description;
-  String _metodoPrenotazione;
-  String _imageLink;
+  int index;
+  String name;
+  String phone;
+  String description;
+  String metodoPrenotazione;
+  String imageLink;
 
-  StoreManager(this._index, this._name, this._phone, this._description,
-      this._metodoPrenotazione, this._imageLink);
+  StoreManager(this.index, this.name, this.phone, this.description,
+      this.metodoPrenotazione, this.imageLink);
 }

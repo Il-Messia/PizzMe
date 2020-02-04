@@ -6,7 +6,7 @@ class Values {
   String developerUrl = "https://www.instagram.com/__theexecutioner__";
   String codeUrl = "https://github.com/Il-Messia/PizzMe";
   String jsonUrl =
-      "https://github.com/Il-Messia/dataListPizzerie/blob/master/list.json";
+      "https://raw.githubusercontent.com/Il-Messia/dataListPizzerie/master/list.json";
 
   double _androidStatusBarHeigth = 25.0;
   double _navBarHeigth = 60.0;
