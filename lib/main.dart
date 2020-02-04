@@ -10,15 +10,19 @@ import 'package:pizzme/pages/permissionPage.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
 import 'package:pizzme/util/permissionManager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pizzme/util/sharedManager.dart';
 import 'res/colori.dart';
 
-void main() => runApp(new MaterialApp(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Colori.darkTheme = await SharedManager.getIntFromShared();
+  runApp(new MaterialApp(
       theme:
           ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     ));
+}
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,24 +31,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Values values = new Values();
-  Future<bool> _getIntFromShared() async {
-    final shared = await SharedPreferences.getInstance();
-    final result = shared.getBool(values.getKeyTheme());
-    if (result == null) {
-      this.setDefaultTheme();
-    } else {
-      setState(() {
-        Colori.darkTheme = result;
-      });
-      return result;
-    }
-    return result;
-  }
-
-  Future<void> setDefaultTheme() async {
-    final shared = await SharedPreferences.getInstance();
-    await shared.setBool(values.getKeyTheme(), false);
-  }
 
   Future<bool> checkConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -70,8 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     PermissionManager.init();
-
-    this._getIntFromShared();
 
     this.checkConnection();
 
@@ -102,6 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
       statusBarIconBrightness:
           Colori.darkTheme ? Brightness.light : Brightness.dark,
     ));
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return new Scaffold(
       body: Stack(
         fit: StackFit.expand,

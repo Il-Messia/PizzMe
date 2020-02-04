@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pizzme/pages/reportPermission.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
+import 'package:pizzme/util/sharedManager.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatefulWidget {
@@ -22,20 +23,17 @@ class _SettingPageState extends State<SettingPage> {
     super.initState();
   }
 
-  Future<void> setDefaultTheme() async {
-    final shared = await SharedPreferences.getInstance();
-    await shared.setBool(values.getKeyTheme(), false);
+  setWhiteTheme() {
     setState(() {
       Colori.darkTheme = false;
     });
   }
 
-  Future<void> setDarkTheme() async {
-    final shared = await SharedPreferences.getInstance();
-    await shared.setBool(values.getKeyTheme(), true);
+  setDarkTheme() {
     setState(() {
       Colori.darkTheme = true;
     });
+    SharedManager.setDarkTheme();
   }
 
   void _showAlert() {
@@ -243,7 +241,7 @@ class _SettingPageState extends State<SettingPage> {
                                 this.setDarkTheme();
                                 this._showAlert();
                               } else {
-                                this.setDefaultTheme();
+                                this.setWhiteTheme();
                                 this._showAlert();
                               }
                             },
@@ -255,17 +253,18 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                _launchURL(values.codeUrl);
-              },
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                color: Colori.darkTheme
-                    ? Colori.darkThemePrimaryColorLight
-                    : Colori.lightThemePrimaryColorLight,
+            Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
+              child: InkWell(
+                onTap: () {
+                  _launchURL(values.codeUrl);
+                },
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -305,62 +304,110 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ),
             ),
-            GestureDetector(
+            Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
+              child: InkWell(
                 onTap: () {
                   _launchURL(values.developerUrl);
                 },
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  color: Colori.darkTheme
-                      ? Colori.darkThemePrimaryColorLight
-                      : Colori.lightThemePrimaryColorLight,
-                  child: Row(
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Container(
-                              margin: new EdgeInsets.only(
-                                  top: 10.0, left: 20.0, bottom: 10.0),
-                              child: Icon(
-                                Icons.account_box,
-                                color: Colori.darkTheme
-                                    ? Colori.endGradient
-                                    : Colori.startGradient,
-                                size: 30.0,
-                              )),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Container(
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
                             margin: new EdgeInsets.only(
                                 top: 10.0, left: 20.0, bottom: 10.0),
-                            child: Center(
-                                child: SizedBox(
-                              //width: 300.0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  _launchURL(values.developerUrl);
-                                },
-                                child: Text(
-                                  'Sviluppatore',
-                                  style: new TextStyle(
-                                      color: Colori.darkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontSize: 20.0,
-                                      fontFamily: 'Roboto'),
-                                ),
-                              ),
+                            child: Icon(
+                              Icons.account_box,
+                              color: Colori.darkTheme
+                                  ? Colori.endGradient
+                                  : Colori.startGradient,
+                              size: 30.0,
                             )),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ))
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Center(
+                              child: Text(
+                            'Sviluppatore',
+                            style: new TextStyle(
+                                color: Colori.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 20.0,
+                                fontFamily: 'Roboto'),
+                          )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colori.darkTheme
+                  ? Colori.darkThemePrimaryColorLight
+                  : Colori.lightThemePrimaryColorLight,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ReportPermissionPage()),
+                  );
+                },
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
+                            margin: new EdgeInsets.only(
+                                top: 10.0, left: 20.0, bottom: 10.0),
+                            child: Icon(
+                              Icons.phone_android,
+                              color: Colori.darkTheme
+                                  ? Colori.endGradient
+                                  : Colori.startGradient,
+                              size: 30.0,
+                            )),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: new EdgeInsets.only(
+                              top: 10.0, left: 20.0, bottom: 10.0),
+                          child: Center(
+                              child: Text(
+                            'Permessi',
+                            style: new TextStyle(
+                                color: Colori.darkTheme
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 20.0,
+                                fontFamily: 'Roboto'),
+                          )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:pizzme/pages/pages.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/permissionManager.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class PermissionPage extends StatefulWidget {
+class ReportPermissionPage extends StatefulWidget {
   @override
-  _PermissionPage createState() => _PermissionPage();
+  _ReportPermissionPage createState() => _ReportPermissionPage();
 }
 
-class _PermissionPage extends State<PermissionPage> {
+class _ReportPermissionPage extends State<ReportPermissionPage> {
   Values values = new Values();
 
   @override
@@ -59,36 +58,9 @@ class _PermissionPage extends State<PermissionPage> {
     ).show();
   }
 
-  void _nextPage() {
-    PermissionManager.init();
-    if (PermissionManager.getPhoneStatus() &&
-        PermissionManager.getStorageStatus() &&
-        PermissionManager.getMessagesStatus()) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Pages()));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      floatingActionButton: new FloatingActionButton(
-        elevation: 5.0,
-        focusColor:
-            Colori.darkTheme ? Colori.startGradient : Colori.endGradient,
-        splashColor:
-            Colori.darkTheme ? Colori.startGradient : Colori.endGradient,
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Pages()));
-        },
-        backgroundColor:
-            Colori.darkTheme ? Colori.endGradient : Colori.startGradient,
-        child: new Icon(
-          Icons.skip_next,
-          color: Colors.white,
-        ),
-      ),
       body: new Container(
           decoration: new BoxDecoration(
             gradient: LinearGradient(
@@ -176,10 +148,6 @@ class _PermissionPage extends State<PermissionPage> {
                         if (PermissionManager.getStorageStatus()) {
                           this._showAlert("Storage",
                               "Questo permesso è stato già concesso!");
-                        } else {
-                          PermissionManager.askStoragePermission();
-                          this._nextPage();
-                          PermissionManager.setStorageStatus(true);
                         }
                       },
                       child: new Row(
@@ -190,7 +158,9 @@ class _PermissionPage extends State<PermissionPage> {
                                   margin: new EdgeInsets.only(
                                       top: 10.0, left: 20.0, bottom: 10.0),
                                   child: Icon(
-                                    Icons.perm_media,
+                                    PermissionManager.getStorageStatus()
+                                        ? Icons.check_box
+                                        : Icons.check_box_outline_blank,
                                     color: Colori.darkTheme
                                         ? Colori.endGradient
                                         : Colori.startGradient,
@@ -235,10 +205,6 @@ class _PermissionPage extends State<PermissionPage> {
                         if (PermissionManager.getPhoneStatus()) {
                           this._showAlert(
                               "Phone", "Questo permesso è stato già concesso!");
-                        } else {
-                          PermissionManager.askPhonePermission();
-                          this._nextPage();
-                          PermissionManager.setPhoneStatus(true);
                         }
                       },
                       child: new Row(
@@ -249,7 +215,9 @@ class _PermissionPage extends State<PermissionPage> {
                                   margin: new EdgeInsets.only(
                                       top: 10.0, left: 20.0, bottom: 10.0),
                                   child: Icon(
-                                    Icons.perm_phone_msg,
+                                    PermissionManager.getPhoneStatus()
+                                        ? Icons.check_box
+                                        : Icons.check_box_outline_blank,
                                     color: Colori.darkTheme
                                         ? Colori.endGradient
                                         : Colori.startGradient,
@@ -279,26 +247,23 @@ class _PermissionPage extends State<PermissionPage> {
                       ),
                     ),
                   ),
-                  new GestureDetector(
-                    onTap: () {
-                      if (PermissionManager.getMessagesStatus()) {
-                        this._showAlert(
-                            "SMS", "Questo permesso è stato già concesso!");
-                      } else {
-                        PermissionManager.askMessagesPermission();
-                        this._nextPage();
-                        PermissionManager.setMessageStatus(true);
-                      }
-                    },
-                    child: new Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      margin: new EdgeInsets.only(
-                          top: 5.0, left: 5.0, right: 5.0, bottom: 5.0),
-                      color: Colori.darkTheme
-                          ? Colori.darkThemePrimaryColorDark
-                          : Colori.lightThemePrimaryColorDark,
+                  new Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    margin: new EdgeInsets.only(
+                        top: 5.0, left: 5.0, right: 5.0, bottom: 5.0),
+                    color: Colori.darkTheme
+                        ? Colori.darkThemePrimaryColorDark
+                        : Colori.lightThemePrimaryColorDark,
+                    child: new InkWell(
+                      onTap: () {
+                        if (PermissionManager.getMessagesStatus()) {
+                          this._showAlert(
+                              "SMS", "Questo permesso è stato già concesso!");
+                        }
+                      },
                       child: new Row(
                         children: <Widget>[
                           Column(
@@ -307,7 +272,9 @@ class _PermissionPage extends State<PermissionPage> {
                                   margin: new EdgeInsets.only(
                                       top: 10.0, left: 20.0, bottom: 10.0),
                                   child: Icon(
-                                    Icons.perm_phone_msg,
+                                    PermissionManager.getMessagesStatus()
+                                        ? Icons.check_box
+                                        : Icons.check_box_outline_blank,
                                     color: Colori.darkTheme
                                         ? Colori.endGradient
                                         : Colori.startGradient,
