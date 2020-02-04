@@ -4,6 +4,7 @@ import 'package:pizzme/pages/reportPermission.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/sharedManager.dart';
+import 'package:pizzme/util/userManager.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,21 +16,21 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   Values values = new Values();
 
-  String _name = "Name";
+  final nameController = new TextEditingController();
 
-  int _ordinazioni = 0;
+  int _ordinazioni = UserData.orderNumber;
   @override
   void initState() {
     super.initState();
   }
 
-  setWhiteTheme() {
+  void setWhiteTheme() {
     setState(() {
       Colori.darkTheme = false;
     });
   }
 
-  setDarkTheme() {
+  void setDarkTheme() {
     setState(() {
       Colori.darkTheme = true;
     });
@@ -72,6 +73,66 @@ class _SettingPageState extends State<SettingPage> {
         )
       ],
     ).show();
+  }
+
+  void setName(String n) {
+    UserData.setName(n);
+    setState(() {
+      UserData.name = n;
+    });
+  }
+
+  void showAlert(String t) {
+    var alertStyle = AlertStyle(
+        backgroundColor: Colori.darkTheme
+            ? Colori.darkThemePrimaryColorDark
+            : Colori.lightThemePrimaryColorLight,
+        animationType: AnimationType.fromBottom,
+        animationDuration: Duration(microseconds: 600),
+        alertBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            side: BorderSide(
+                color: Colori.darkTheme
+                    ? Colori.darkThemePrimaryColorDark
+                    : Colori.lightThemePrimaryColorLight)),
+        titleStyle: TextStyle(
+            color: Colori.darkTheme ? Colors.white : Colors.black,
+            fontFamily: 'Roboto',
+            fontSize: 30.0));
+    Alert(
+      title: '',
+        type: AlertType.info,
+        context: context,
+        style: alertStyle,
+        content: Column(
+          children: <Widget>[
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.account_circle),
+                  labelText: 'Nome: ',
+                  hintText: 'Mario'),
+                  cursorColor: Colori.darkTheme ? Colors.white : Colors.black,
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: (){
+              if(nameController.text == ""){
+                this.setName('User');
+              }else{
+                this.setName(nameController.text);
+              }
+              Navigator.pop(context);
+            },
+            child: Text(
+              "SALVA",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 20, fontFamily: 'Roboto'),
+            ),
+          )
+        ]).show();
   }
 
   @override
@@ -128,9 +189,13 @@ class _SettingPageState extends State<SettingPage> {
                     children: <Widget>[
                       Container(
                         margin: new EdgeInsets.only(left: 15.0),
-                        child: Center(
+                        child: InkWell(
+                            onTap: (){
+                              this.showAlert('NOME');
+                            },
+                            child: Center(
                           child: Text(
-                            _name,
+                            UserData.name,
                             textAlign: TextAlign.center,
                             style: new TextStyle(
                               fontSize: 35.0,
@@ -140,7 +205,7 @@ class _SettingPageState extends State<SettingPage> {
                               fontFamily: 'Roboto',
                             ),
                           ),
-                        ),
+                        )),
                       )
                     ],
                   )

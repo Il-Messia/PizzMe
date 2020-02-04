@@ -1,6 +1,8 @@
 class Values{
 
   String _keyTheme = "THEME";
+  String _keyName = "NAME";
+  String _keyOrder = "ORDER";
 
   String developerUrl = "https://www.instagram.com/__theexecutioner__";
   String codeUrl = "https://github.com/Il-Messia/PizzMe";
@@ -18,6 +20,12 @@ class Values{
 
   String getKeyTheme(){
     return this._keyTheme;
+  }
+  String getKeyName(){
+    return this._keyName;
+  }
+  String getKeyOrder(){
+    return this._keyOrder;
   }
 
   double getSplashMargin(){

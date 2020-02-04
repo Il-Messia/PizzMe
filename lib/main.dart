@@ -11,11 +11,12 @@ import 'package:pizzme/res/values.dart';
 import 'package:flutter/services.dart';
 import 'package:pizzme/util/permissionManager.dart';
 import 'package:pizzme/util/sharedManager.dart';
+import 'package:pizzme/util/userManager.dart';
 import 'res/colori.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Colori.darkTheme = await SharedManager.getIntFromShared();
+  Colori.darkTheme = await SharedManager.getThemeFromShared();
   runApp(new MaterialApp(
       theme:
           ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
@@ -56,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     PermissionManager.init();
+    UserData.init();
 
     this.checkConnection();
 
