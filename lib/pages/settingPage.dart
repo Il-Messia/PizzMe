@@ -28,6 +28,7 @@ class _SettingPageState extends State<SettingPage> {
     setState(() {
       Colori.darkTheme = false;
     });
+    SharedManager.setWhiteTheme();
   }
 
   void setDarkTheme() {
@@ -244,8 +245,9 @@ class _SettingPageState extends State<SettingPage> {
                           'Ordinazioni effettuate: $_ordinazioni',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color:
-                                Colori.darkTheme ? Colors.white : Colors.black,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -287,8 +289,9 @@ class _SettingPageState extends State<SettingPage> {
                           'Tema scuro',
                           style: new TextStyle(
                             fontSize: 20.0,
-                            color:
-                                Colori.darkTheme ? Colors.white : Colors.black,
+                            color: Colori.darkTheme
+                                ? Colors.white
+                                : Colors.black,
                             fontFamily: 'Roboto',
                           ),
                         ),

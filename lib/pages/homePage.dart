@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/jsonManager.dart';
+import 'package:pizzme/util/storeManaget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,6 +15,53 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Widget buildCard(BuildContext context, StoreManager storeManager) {
+    return InkWell(
+      onTap: () {},
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: Colori.darkTheme
+            ? Colori.darkThemePrimaryColorLight
+            : Colori.lightThemePrimaryColorLight,
+        child: new Center(
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                children: <Widget>[
+                  Container(
+                    child: new Image(
+                        height: 150.0,
+                        width: MediaQuery.of(context).size.width - (20.0 * 2),
+                        alignment: Alignment.center,
+                        fit: BoxFit.scaleDown,
+                        image: new NetworkImage(storeManager.imageLink)),
+                  ),
+                ],
+              ),
+              new Row(
+                children: <Widget>[
+                  Container(
+                    margin: new EdgeInsets.only(left: 15.0, bottom: 15.0),
+                    child: new Text(
+                      storeManager.name,
+                      style: new TextStyle(
+                          color: Colori.darkTheme ? Colors.white : Colors.black,
+                          fontFamily: 'Roboto',
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -41,11 +89,8 @@ class _HomePageState extends State<HomePage> {
             } else {
               return ListView.builder(
                 itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(snapshot.data[index].name),
-                  );
-                },
+                itemBuilder: (BuildContext context, int index) =>
+                    this.buildCard(context, snapshot.data[index]),
               );
             }
           },

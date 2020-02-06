@@ -5,6 +5,10 @@ class Colori{
 
   static bool darkTheme = false;
 
+  void changeTheme(){
+    darkTheme = !darkTheme;
+  }
+
   static Color startGradient = new Color(0xFFFD4A1E);
   static Color endGradient = new Color(0xFFB01054);
 
