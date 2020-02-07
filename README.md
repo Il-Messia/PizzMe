@@ -3,8 +3,9 @@
 De Leo Alex     5CIA      8/02/2020
 
 Progetto creato tramite il framework Flutter.
-  *[ https://drive.google.com/open?id=1Ii7FG64rZJxQu6nYR8zst-lsrsSas6D_]Documentazione\n
-  *[ https://github.com/Il-Messia/dataListPizzerie ] Repository dei dati per le pizzerie
+*[ https://drive.google.com/open?id=1Ii7FG64rZJxQu6nYR8zst-lsrsSas6D_]Documentazione
+  
+*[ https://github.com/Il-Messia/dataListPizzerie ] Repository dei dati per le pizzerie
 
 ## Getting Started
 
