@@ -1,10 +1,14 @@
-# PizzMe
+# De Leo Alex
 
-## De Leo Alex     5CIA      8/02/2020
+## PizzMe
 
 Progetto creato tramite il framework Flutter.
-  - [https://drive.google.com/open?id=1Ii7FG64rZJxQu6nYR8zst-lsrsSas6D] Documentazione 
-  - [https://github.com/Il-Messia/dataListPizzerie] Repository dei dati per le pizzerie
+  - [Documentazione.](https://drive.google.com/open?id=1Ii7FG64rZJxQu6nYR8zst-lsrsSas6D)
+  - [Repository lista pizzerie.](https://github.com/Il-Messia/dataListPizzerie)
+
+## Descrizione:
+Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli studenti [del kennedy](http://www.itiskennedy.gov.it/) l'ordinazione delle pizze da mangiare per il rientro. Essa permette di creare una lista di pizze e bibite da ordinare qualora la pizzeria permetta ordinazione tramite messaggio. Se non fosse possibile ordinare tramite messaggio l'app permette di chiamare la pizzeria desiderata
+
 
 ## Getting Started
 
