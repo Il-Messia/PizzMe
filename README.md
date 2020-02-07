@@ -27,7 +27,8 @@ Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli
 
   - Minima API: 21
   - Target API: 28
-  - IDE: [Visual Studio Code]()
+  - IDE: [Visual Studio Code](https://code.visualstudio.com/)
+  - Ore uomo lavoro: 40 ore
 
 ## Getting Started
 
