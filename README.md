@@ -22,6 +22,12 @@ Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli
       - infoPage
     - settingsPage
       - permissionStatus
+      
+## Tecnichal spech
+
+  - Minima API: 21
+  - Target API: 28
+  - IDE: [Visual Studio Code]()
 
 ## Getting Started
 
