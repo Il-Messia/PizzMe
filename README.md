@@ -7,8 +7,21 @@ Progetto creato tramite il framework Flutter.
   - [Repository lista pizzerie.](https://github.com/Il-Messia/dataListPizzerie)
 
 ## Descrizione:
+
 Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli studenti [del kennedy](http://www.itiskennedy.gov.it/) l'ordinazione delle pizze da mangiare per il rientro. Essa permette di creare una lista di pizze e bibite da ordinare qualora la pizzeria permetta ordinazione tramite messaggio. Se non fosse possibile ordinare tramite messaggio l'app permette di chiamare la pizzeria desiderata
 
+## Activity
+
+- SplashScreen
+  - CheckPermission
+  - Pages
+    - litPage
+      - addPizza
+      - addDrink
+    - homePage
+      - infoPage
+    - settingsPage
+      - permissionStatus
 
 ## Getting Started
 
