@@ -29,6 +29,7 @@ Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli
   - Target API: 28
   - IDE: [Visual Studio Code](https://code.visualstudio.com/)
   - Ore uomo lavoro: 40 ore
+  - Android O.S. testati: [7.1](https://www.android.com/intl/it_it/versions/nougat-7-0/), [8.0](https://www.android.com/versions/oreo-8-0/), [9.0](https://www.android.com/versions/pie-9-0/), [10.0](https://www.android.com/android-10/)
 
 ## Getting Started
 
