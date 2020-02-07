@@ -4,6 +4,8 @@ import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/jsonManager.dart';
 import 'package:pizzme/util/storeManaget.dart';
 
+import 'infoPage.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,15 +20,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildCard(BuildContext context, StoreManager storeManager) {
-    return InkWell(
-      onTap: () {},
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: Colori.darkTheme
-            ? Colori.darkThemePrimaryColorLight
-            : Colori.lightThemePrimaryColorLight,
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      color: Colori.darkTheme
+          ? Colori.darkThemePrimaryColorLight
+          : Colori.lightThemePrimaryColorLight,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoPage(storeManager: storeManager,)),
+                  );
+        },
         child: new Center(
           child: new Column(
             children: <Widget>[
@@ -85,7 +94,9 @@ class _HomePageState extends State<HomePage> {
           future: JsonManager.getStore(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
-              return Center(child: Text('Loading..'));
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data.length,

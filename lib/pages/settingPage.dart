@@ -16,6 +16,8 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   Values values = new Values();
 
+  Colori _c = new Colori();
+
   final nameController = new TextEditingController();
 
   int _ordinazioni = UserData.orderNumber;
@@ -27,6 +29,7 @@ class _SettingPageState extends State<SettingPage> {
   void setWhiteTheme() {
     setState(() {
       Colori.darkTheme = false;
+      _c.changeTheme(false);
     });
     SharedManager.setWhiteTheme();
   }
@@ -34,6 +37,7 @@ class _SettingPageState extends State<SettingPage> {
   void setDarkTheme() {
     setState(() {
       Colori.darkTheme = true;
+      _c.changeTheme(true);
     });
     SharedManager.setDarkTheme();
   }

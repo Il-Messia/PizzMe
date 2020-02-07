@@ -21,11 +21,13 @@ class _PagesState extends State<Pages> {
 
   Color _c1, _c2, _c3;
 
+  Colori _c = new Colori();
+
   @override
   void initState(){
     super.initState();
 
-    if(Colori.darkTheme){
+    if(_c.getTheme()){
             _c2 = Colori.endGradient;
             _c1 = _c3 = Colors.white;
           }else{
@@ -45,7 +47,7 @@ class _PagesState extends State<Pages> {
     switch (page) {
       case 0:
         setState(() {
-          if(Colori.darkTheme){
+          if(_c.getTheme()){
             _c1 = Colori.endGradient;
             _c2 = _c3 = Colors.white;
           }else{
@@ -57,7 +59,7 @@ class _PagesState extends State<Pages> {
         break;
       case 1:
         setState(() {
-          if(Colori.darkTheme){
+          if(_c.getTheme()){
             _c2 = Colori.endGradient;
             _c1 = _c3 = Colors.white;
           }else{
@@ -69,7 +71,7 @@ class _PagesState extends State<Pages> {
         break;
       case 2:
         setState(() {
-          if(Colori.darkTheme){
+          if(_c.getTheme()){
             _c3 = Colori.endGradient;
             _c2 = _c1 = Colors.white;
           }else{
@@ -94,7 +96,7 @@ class _PagesState extends State<Pages> {
         key: _bottomNavigationKey,
         height: values.getNavBarHeigth(),
         index: _page,
-        color:Colori.darkTheme ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorLight,
+        color:_c.getTheme() ? Colori.darkThemePrimaryColorDark:  Colori.lightThemePrimaryColorLight,
         backgroundColor: Colori.startGradient,
         items: <Widget>[
           //provare a cambiare colore

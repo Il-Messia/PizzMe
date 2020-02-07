@@ -4,6 +4,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedManager {
   static Values values = new Values();
 
+  static Future<void> setPhoneNumber(String phone) async {
+    final shared = await SharedPreferences.getInstance();
+    await shared.setString(values.getKeyPhone(), phone);
+  }
+
+  static Future<String> getPhoneNumber() async {
+    final shared = await SharedPreferences.getInstance();
+    final result = shared.getString(values.getKeyPhone());
+    if (result == null) {
+      SharedManager.setDefaultName();
+      return '00000000000';
+    }
+    return result;
+  }
+
   static Future<void> setDarkTheme() async {
     final shared = await SharedPreferences.getInstance();
     await shared.setBool(values.getKeyTheme(), true);

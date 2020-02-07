@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Colori{
+class Colori with ChangeNotifier{
 
   static bool darkTheme = false;
 
-  void changeTheme(){
-    darkTheme = !darkTheme;
+  void changeTheme(bool value){
+    darkTheme = value;
+    notifyListeners();
+  }
+
+  bool getTheme(){
+    return darkTheme;
   }
 
   static Color startGradient = new Color(0xFFFD4A1E);

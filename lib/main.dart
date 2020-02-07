@@ -55,7 +55,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     PermissionManager.init();
     UserData.init();
 
@@ -65,11 +64,9 @@ class _SplashScreenState extends State<SplashScreen> {
       if (PermissionManager.getPhoneStatus() &&
           PermissionManager.getStorageStatus() &&
           PermissionManager.getMessagesStatus()) {
-        print("Permessi concessi");
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Pages()));
       } else {
-        print("Permessi negati");
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => PermissionPage()));
       }
