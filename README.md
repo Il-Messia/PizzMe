@@ -3,7 +3,7 @@
 ## PizzMe
 
 Progetto creato tramite il framework Flutter.
-  - [Documentazione.](https://drive.google.com/open?id=1Ii7FG64rZJxQu6nYR8zst-lsrsSas6D)
+  - [Documentazione.](https://docs.google.com/document/d/1Yb1iCmlBP4X3K0OYo_3VvjiLoTO_QZ9WyZw_8xOLK-w/edit?usp=drivesdk)
   - [Repository lista pizzerie.](https://github.com/Il-Messia/dataListPizzerie)
 
 ## Descrizione:
