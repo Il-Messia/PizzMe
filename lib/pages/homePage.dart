@@ -31,10 +31,12 @@ class _HomePageState extends State<HomePage> {
       child: InkWell(
         onTap: () {
           Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => InfoPage(storeManager: storeManager,)),
-                  );
+            context,
+            MaterialPageRoute(
+                builder: (context) => InfoPage(
+                      storeManager: storeManager,
+                    )),
+          );
         },
         child: new Center(
           child: new Column(
@@ -90,21 +92,24 @@ class _HomePageState extends State<HomePage> {
                 offset: Offset(0.0, 5.0))
           ]),
       child: Center(
-        child: FutureBuilder(
-          future: JsonManager.getStore(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    this.buildCard(context, snapshot.data[index]),
-              );
-            }
-          },
+        child: Container(
+          margin: EdgeInsets.only(top:10.0, bottom:10.0),
+          child: FutureBuilder(
+            future: JsonManager.getStore(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.data == null) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      this.buildCard(context, snapshot.data[index]),
+                );
+              }
+            },
+          ),
         ),
       ),
     );

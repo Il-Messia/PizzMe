@@ -49,7 +49,9 @@ class InfoPage extends StatelessWidget {
               backgroundColor: Colors.red,
               label: 'Chiama',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
+              onTap: () async{
+                var n = await SharedManager.getOrderNumberFromShared();
+                SharedManager.setOrder(n+1);
                 String aux = storeManager.phone;
                 final phone = 'tel:$aux';
                 this._launchURL(phone);
