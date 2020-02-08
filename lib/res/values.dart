@@ -3,6 +3,7 @@ class Values {
   String _keyName = "NAME";
   String _keyOrder = "ORDER";
   String _keyPhone = "PHONE";
+  String _keyMethod = "METHOD";
 
   String developerUrl = "https://www.instagram.com/__theexecutioner__";
   String codeUrl = "https://github.com/Il-Messia/PizzMe";
@@ -34,6 +35,10 @@ class Values {
 
   String getKeyPhone() {
     return this._keyPhone;
+  }
+
+  String getKeyMethod(){
+    return this._keyMethod;
   }
 
   double getSplashMargin() {

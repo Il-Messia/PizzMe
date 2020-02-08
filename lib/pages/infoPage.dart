@@ -64,6 +64,7 @@ class InfoPage extends StatelessWidget {
             onTap: () {
               var aux = storeManager.phone;
               SharedManager.setPhoneNumber(storeManager.phone);
+              SharedManager.setMethod(storeManager.metodoPrenotazione);
               Fluttertoast.showToast(
                   msg: "Savataggio del numero: $aux",
                   toastLength: Toast.LENGTH_SHORT,

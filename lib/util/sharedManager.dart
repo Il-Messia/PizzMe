@@ -9,11 +9,24 @@ class SharedManager {
     await shared.setString(values.getKeyPhone(), phone);
   }
 
+  static Future<void> setMethod(String method) async{
+    final shared = await SharedPreferences.getInstance();
+    await shared.setString(values.getKeyMethod(), method);
+  }
+
+  static Future<String> getMethod() async {
+    final shared = await SharedPreferences.getInstance();
+    final result = shared.getString(values.getKeyMethod());
+    if (result == null) {
+      return 'null';
+    }
+    return result;
+  }
+
   static Future<String> getPhoneNumber() async {
     final shared = await SharedPreferences.getInstance();
     final result = shared.getString(values.getKeyPhone());
     if (result == null) {
-      SharedManager.setDefaultName();
       return '00000000000';
     }
     return result;
