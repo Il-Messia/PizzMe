@@ -24,7 +24,7 @@ Progetto android di De Leo Alex. Questa app è stata pensata per permettere agli
     - settingsPage
       - permissionStatus
       
-## Tecnichal spech
+## Technical spech
 
   - Minima API: 21
   - Target API: 28
