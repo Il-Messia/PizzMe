@@ -18,11 +18,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Colori.darkTheme = await SharedManager.getThemeFromShared();
   runApp(new MaterialApp(
-      theme:
-          ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    ));
+    theme:
+        ThemeData(primaryColor: Colors.white, accentColor: Colors.pinkAccent),
+    debugShowCheckedModeBanner: false,
+    home: SplashScreen(),
+  ));
 }
 
 class SplashScreen extends StatefulWidget {
@@ -45,8 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
+          backgroundColor: Colori.darkTheme
+              ? Colori.darkThemePrimaryColorDark
+              : Colori.lightThemePrimaryColorLight,
+          textColor: Colori.darkTheme ? Colors.white : Colors.black,
           fontSize: 16.0);
       return false;
     }
@@ -55,15 +57,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    
     PermissionManager.init();
+    
     UserData.init();
-
+    
     this.checkConnection();
 
     Timer(Duration(milliseconds: values.getSplashTime()), () {
-      if (PermissionManager.getPhoneStatus() &&
-          PermissionManager.getStorageStatus() &&
-          PermissionManager.getMessagesStatus()) {
+      if (PermissionManager.getAllPermissionStatus()) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Pages()));
       } else {

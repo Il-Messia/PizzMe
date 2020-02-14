@@ -13,7 +13,6 @@ class InfoPage extends StatelessWidget {
 
   _launchURL(url) async {
     if (await canLaunch(url)) {
-      print("Opening url");
       await launch(url);
     } else {
       throw 'Could not launch $url';

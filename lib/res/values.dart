@@ -1,4 +1,5 @@
 class Values {
+
   String _keyTheme = "THEME";
   String _keyName = "NAME";
   String _keyOrder = "ORDER";
@@ -10,16 +11,22 @@ class Values {
   String jsonUrl =
       "https://raw.githubusercontent.com/Il-Messia/dataListPizzerie/master/list.json";
 
+  int _splashTime = 4250;
+
   double _androidStatusBarHeigth = 25.0;
   double _navBarHeigth = 60.0;
   double _avatarRadius = 65.0;
 
-  int _splashTime = 4250;
-
+  double _defaultMargin = 15.0;
+  double _bottomFromNavBarMargin = 20.0;
   double _splashMargin = 10.0;
   double _splashWeight = 8.0;
+
   double _externalSplashRadius = 30.0;
   double _internalSplashRadius = 25.0;
+  double _defaultRadius = 15.0;
+
+  double _infoCardHeight = 150.0;
 
   String getKeyTheme() {
     return this._keyTheme;
@@ -37,7 +44,7 @@ class Values {
     return this._keyPhone;
   }
 
-  String getKeyMethod(){
+  String getKeyMethod() {
     return this._keyMethod;
   }
 
@@ -67,6 +74,22 @@ class Values {
 
   double getAvatarRadius() {
     return this._avatarRadius;
+  }
+
+  double getDefaultRadius() {
+    return this._defaultRadius;
+  }
+
+  double getInfoCardHeight() {
+    return this._infoCardHeight;
+  }
+
+  double getDefaultMargin(){
+    return this._defaultMargin;
+  }
+
+  double getBottomFromNavBarMargin(){
+    return this._bottomFromNavBarMargin;
   }
 
   int getSplashTime() {

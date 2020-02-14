@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(values.getDefaultRadius()),
       ),
       color: Colori.darkTheme
           ? Colori.darkThemePrimaryColorLight
@@ -46,13 +46,17 @@ class _HomePageState extends State<HomePage> {
               new Row(
                 children: <Widget>[
                   Container(
-                    child: new Image(
-                        height: 150.0,
-                        width: MediaQuery.of(context).size.width - (60.0),
-                        alignment: Alignment.center,
-                        fit: BoxFit.scaleDown,
-                        image: new NetworkImage(storeManager.imageLink)),
-                  ),
+                    child: new FadeInImage.assetNetwork(
+                      height: values.getInfoCardHeight(),
+                      width: MediaQuery.of(context).size.width -
+                          (values.getDefaultMargin() * 4),
+                      alignment: Alignment.center,
+                      fit: BoxFit.scaleDown,
+                      image: storeManager.imageLink,
+                      fadeInCurve: Curves.bounceIn,
+                      placeholder: 'images/launcher/Logo.png',
+                    ),
+                  )
                 ],
               ),
               new Row(
@@ -110,12 +114,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: new EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
+      margin: new EdgeInsets.only(
+          left: values.getDefaultMargin(),
+          right: values.getDefaultMargin(),
+          bottom: values.getBottomFromNavBarMargin()),
       decoration: new BoxDecoration(
           color: Colori.darkTheme
               ? Colori.darkThemePrimaryColorDark
               : Colori.lightThemePrimaryColorDark,
-          borderRadius: new BorderRadius.all(Radius.circular(15.0)),
+          borderRadius:
+              new BorderRadius.all(Radius.circular(values.getDefaultRadius())),
           boxShadow: [
             new BoxShadow(
                 color: Colors.black38,
@@ -125,8 +133,10 @@ class _HomePageState extends State<HomePage> {
           ]),
       child: Center(
         child: Container(
-          margin:
-              EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+          margin: EdgeInsets.all(10.0),
+          decoration: new BoxDecoration(
+              borderRadius: new BorderRadius.all(
+                  Radius.circular(values.getDefaultRadius()))),
           child: RefreshIndicator(
             key: keyRefresh,
             onRefresh: () async {

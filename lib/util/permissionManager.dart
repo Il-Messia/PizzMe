@@ -67,4 +67,8 @@ class PermissionManager{
     return _messages;
   }
 
+  static bool getAllPermissionStatus(){
+    return _messages&&_phone&&_storage;
+  }
+
 }
