@@ -1,5 +1,17 @@
-import 'dart:async';
+/*-------------------------------------------------------------------------------
+  Created by Alex De Leo
+  GitHub: https://github.com/Il-Messia
+  Description: Simple app created through the Flutter framework. It allows the 
+               ordering of pizzas for takeaway by message or call.
+ ------------------------------------------------------------------------------*/
+ /*-------------------------------------------------------------------------------
+ main.dart
+  -spashScreen
+  -init function
+  ------------------------------------------------------------------------------*/
 
+import 'dart:async';
+import 'dart:math';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -34,14 +46,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Values values = new Values();
 
   Future<bool> checkConnection() async {
+
     var connectivityResult = await (Connectivity().checkConnectivity());
+
     if (connectivityResult == ConnectivityResult.mobile) {
       return true;
     } else if (connectivityResult == ConnectivityResult.wifi) {
       return true;
     } else {
       Fluttertoast.showToast(
-          msg: "Rete sconnessa, connetti il tuo cellulare!",
+          msg: "Rete non connessa, connetti il tuo cellulare!",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
@@ -64,7 +78,9 @@ class _SplashScreenState extends State<SplashScreen> {
     
     this.checkConnection();
 
-    Timer(Duration(milliseconds: values.getSplashTime()), () {
+    Random random = new Random();
+
+    Timer(Duration(milliseconds: random.nextInt(values.getSplashTime())), () {
       if (PermissionManager.getAllPermissionStatus()) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Pages()));

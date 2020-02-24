@@ -1,6 +1,14 @@
+/*-------------------------------------------------------------------------------
+  Created by Alex De Leo
+  GitHub: https://github.com/Il-Messia
+  Description: Simple app created through the Flutter framework. It allows the 
+               ordering of pizzas for takeaway by message or call.
+ ------------------------------------------------------------------------------*/
+ /*-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------*/
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/storeManaget.dart';
 

@@ -1,3 +1,12 @@
+/*-------------------------------------------------------------------------------
+  Created by Alex De Leo
+  GitHub: https://github.com/Il-Messia
+  Description: Simple app created through the Flutter framework. It allows the 
+               ordering of pizzas for takeaway by message or call.
+ ------------------------------------------------------------------------------*/
+ /*-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------*/
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pizzme/res/colori.dart';
@@ -31,6 +40,20 @@ class _ListPageState extends State<ListPage> {
   final nPizze = new TextEditingController();
   final drink = new TextEditingController();
   final nameController = new TextEditingController();
+  
+  double _height = 0.0;
+
+  bool _getHeight(){
+    _height = MediaQuery.of(context).size.height / 5;
+    return true;
+  }
+  bool _getButtonHeight(){
+    print(MediaQuery.of(context).size.height);
+    if(MediaQuery.of(context).size.height <= 600){
+      return true;
+    }
+    return false;
+  }
 
   void _addPizza(String g, int n) {
     listPizza.add(new PizzaManager(g, n));
@@ -241,7 +264,7 @@ class _ListPageState extends State<ListPage> {
     Scaffold.of(context).showSnackBar(new SnackBar(
       content: Text(pizzaManager.toString()),
       action: SnackBarAction(
-        label: 'UNDO',
+        label: 'ANNULLA',
         onPressed: (){
           listPizza.insert(index, pizzaManager);
           setState(() {
@@ -454,16 +477,16 @@ class _ListPageState extends State<ListPage> {
                   ],
                 ),
                 new SizedBox(
-                  height: 150.0,
+                  height: _getHeight() ? _height : _height,
                   child: auxl1,
                 ),
                 new Row(
                   children: <Widget>[
                     new Container(
                       margin: EdgeInsets.only(
-                          top: 15.0,
                           left: MediaQuery.of(context).size.width - 100.0),
                       child: new FloatingActionButton(
+                        mini: _getButtonHeight(),
                         onPressed: () {
                           this._showAddPizzaAlert();
                         },
@@ -500,7 +523,7 @@ class _ListPageState extends State<ListPage> {
                   ],
                 ),
                 new SizedBox(
-                  height: 150.0,
+                  height:  _getHeight() ? _height : _height,
                   child: auxl2,
                 ),
                 new Row(
@@ -509,6 +532,7 @@ class _ListPageState extends State<ListPage> {
                       margin: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width - 100.0),
                       child: new FloatingActionButton(
+                        mini: _getButtonHeight(),
                         onPressed: () {
                           this._showAddDrinkAlert();
                         },
@@ -532,6 +556,7 @@ class _ListPageState extends State<ListPage> {
                   runSpacing: 4.0, // gap between lines
                   children: <Widget>[
                     FloatingActionButton(
+                      mini: _getButtonHeight(),
                       onPressed: () {
                         this._showClearAlert();
                       },
@@ -548,6 +573,7 @@ class _ListPageState extends State<ListPage> {
                       elevation: 5.0,
                     ),
                     FloatingActionButton(
+                      mini: _getButtonHeight(),
                       onPressed: () async {
                         var n = await SharedManager.getOrderNumberFromShared();
                         var phone = await SharedManager.getPhoneNumber();
@@ -623,6 +649,7 @@ class _ListPageState extends State<ListPage> {
                       elevation: 5.0,
                     ),
                     FloatingActionButton(
+                      mini: _getButtonHeight(),
                       onPressed: () async {
                         var n = await SharedManager.getOrderNumberFromShared();
                         var phone = await SharedManager.getPhoneNumber();

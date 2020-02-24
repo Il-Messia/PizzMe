@@ -1,9 +1,17 @@
+/*-------------------------------------------------------------------------------
+  Created by Alex De Leo
+  GitHub: https://github.com/Il-Messia
+  Description: Simple app created through the Flutter framework. It allows the 
+               ordering of pizzas for takeaway by message or call.
+ ------------------------------------------------------------------------------*/
+ /*-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------*/
+
 import 'package:flutter/material.dart';
 import 'package:pizzme/res/colori.dart';
 import 'package:pizzme/res/values.dart';
 import 'package:pizzme/util/jsonManager.dart';
 import 'package:pizzme/util/storeManaget.dart';
-
 import 'infoPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.center,
                       fit: BoxFit.scaleDown,
                       image: storeManager.imageLink,
-                      fadeInCurve: Curves.bounceIn,
+                      fadeInCurve: Curves.ease,
                       placeholder: 'images/launcher/Logo.png',
                     ),
                   )
