@@ -158,7 +158,6 @@ class InfoPage extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width - 30,
-                          height: MediaQuery.of(context).size.height,
                           margin: EdgeInsets.only(
                               left: 15.0, 
                               top: 15.0, 

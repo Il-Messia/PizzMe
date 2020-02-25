@@ -371,7 +371,9 @@ class _ListPageState extends State<ListPage> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 listDrink[index].toString(),
-                style: TextStyle(fontSize: 22.0),
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colori.darkTheme ? Colors.white : Colors.black),
               ),
             ),
           ),
@@ -419,7 +421,9 @@ class _ListPageState extends State<ListPage> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 listPizza[index].toString(),
-                style: TextStyle(fontSize: 22.0),
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colori.darkTheme ? Colors.white : Colors.black),
               ),
             ),
           ),
