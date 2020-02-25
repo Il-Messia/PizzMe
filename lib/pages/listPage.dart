@@ -4,7 +4,7 @@
   Description: Simple app created through the Flutter framework. It allows the 
                ordering of pizzas for takeaway by message or call.
  ------------------------------------------------------------------------------*/
- /*-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
   ------------------------------------------------------------------------------*/
 
 import 'package:flutter/material.dart';
@@ -40,16 +40,17 @@ class _ListPageState extends State<ListPage> {
   final nPizze = new TextEditingController();
   final drink = new TextEditingController();
   final nameController = new TextEditingController();
-  
+
   double _height = 0.0;
 
-  bool _getHeight(){
+  bool _getHeight() {
     _height = MediaQuery.of(context).size.height / 5;
     return true;
   }
-  bool _getButtonHeight(){
+
+  bool _getButtonHeight() {
     print(MediaQuery.of(context).size.height);
-    if(MediaQuery.of(context).size.height <= 600){
+    if (MediaQuery.of(context).size.height <= 600) {
       return true;
     }
     return false;
@@ -68,7 +69,7 @@ class _ListPageState extends State<ListPage> {
         backgroundColor: Colori.darkTheme
             ? Colori.darkThemePrimaryColorDark
             : Colori.lightThemePrimaryColorLight,
-        animationType: AnimationType.fromBottom,
+        animationType: AnimationType.fromTop,
         alertBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
             side: BorderSide(
@@ -87,13 +88,41 @@ class _ListPageState extends State<ListPage> {
       content: Column(
         children: <Widget>[
           TextField(
+            style: new TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black),
             controller: gusto,
-            decoration:
-                InputDecoration(labelText: 'Gusto: ', hintText: 'Salsiccia'),
+            decoration: InputDecoration(
+              labelText: 'Gusto: ',
+              hintText: 'Salsiccia',
+              fillColor: Colori.darkTheme ? Colors.white : Colors.black,
+              labelStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+              hintStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+              helperStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+            ),
           ),
           TextField(
             controller: nPizze,
-            decoration: InputDecoration(labelText: 'Numero: ', hintText: '5'),
+            style: new TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black),
+            decoration: InputDecoration(
+              labelText: 'Numero: ',
+              hintText: '5',
+              labelStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+              hintStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+              helperStyle: TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black,
+              ),
+            ),
           ),
         ],
       ),
@@ -156,13 +185,38 @@ class _ListPageState extends State<ListPage> {
       content: Column(
         children: <Widget>[
           TextField(
+            style: new TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black),
             controller: drink,
-            decoration:
-                InputDecoration(labelText: 'Bibita: ', hintText: 'Coca Cola'),
+            decoration: InputDecoration(
+                labelText: 'Bibita: ',
+                hintText: 'Coca Cola',
+                labelStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                ),
+                hintStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                ),
+                helperStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                )),
           ),
           TextField(
+            style: new TextStyle(
+                color: Colori.darkTheme ? Colors.white : Colors.black),
             controller: nPizze,
-            decoration: InputDecoration(labelText: 'Numero: ', hintText: '5'),
+            decoration: InputDecoration(
+                labelText: 'Numero: ',
+                hintText: '5',
+                labelStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                ),
+                hintStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                ),
+                helperStyle: TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black,
+                )),
           ),
         ],
       ),
@@ -265,7 +319,7 @@ class _ListPageState extends State<ListPage> {
       content: Text(pizzaManager.toString()),
       action: SnackBarAction(
         label: 'ANNULLA',
-        onPressed: (){
+        onPressed: () {
           listPizza.insert(index, pizzaManager);
           setState(() {
             auxl1 = listViewPizza();
@@ -280,7 +334,7 @@ class _ListPageState extends State<ListPage> {
       content: Text(drinkManager.toString()),
       action: SnackBarAction(
         label: 'UNDO',
-        onPressed: (){
+        onPressed: () {
           listDrink.insert(index, drinkManager);
           setState(() {
             auxl2 = listViewDrink();
@@ -523,7 +577,7 @@ class _ListPageState extends State<ListPage> {
                   ],
                 ),
                 new SizedBox(
-                  height:  _getHeight() ? _height : _height,
+                  height: _getHeight() ? _height : _height,
                   child: auxl2,
                 ),
                 new Row(

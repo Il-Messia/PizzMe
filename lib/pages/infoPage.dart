@@ -4,7 +4,12 @@
   Description: Simple app created through the Flutter framework. It allows the 
                ordering of pizzas for takeaway by message or call.
  ------------------------------------------------------------------------------*/
- /*-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
+InfoPage.dart
+  -Pizzeria's name
+  -Image of the pizzeria
+  -Description
+  -Multiple floating action button
   ------------------------------------------------------------------------------*/
 
 import 'package:flutter/material.dart';
@@ -24,7 +29,7 @@ class InfoPage extends StatelessWidget {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      throw "Impossibile aprire l'url: $url";
     }
   }
 
@@ -57,9 +62,9 @@ class InfoPage extends StatelessWidget {
               backgroundColor: Colors.red,
               label: 'Chiama',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () async{
+              onTap: () async {
                 var n = await SharedManager.getOrderNumberFromShared();
-                SharedManager.setOrder(n+1);
+                SharedManager.setOrder(n + 1);
                 String aux = storeManager.phone;
                 final phone = 'tel:$aux';
                 this._launchURL(phone);
@@ -152,7 +157,12 @@ class InfoPage extends StatelessWidget {
                     new Row(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(left: 15.0, top: 15.0),
+                          width: MediaQuery.of(context).size.width - 30,
+                          height: MediaQuery.of(context).size.height,
+                          margin: EdgeInsets.only(
+                              left: 15.0, 
+                              top: 15.0, 
+                              right: 15.0),
                           child: Text(
                             storeManager.description,
                             style: new TextStyle(

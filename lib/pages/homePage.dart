@@ -4,7 +4,10 @@
   Description: Simple app created through the Flutter framework. It allows the 
                ordering of pizzas for takeaway by message or call.
  ------------------------------------------------------------------------------*/
- /*-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
+HomePage.dart
+  -list of pizza stores
+    -InfoPage of a pizza store
   ------------------------------------------------------------------------------*/
 
 import 'package:flutter/material.dart';
@@ -21,10 +24,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Values values = new Values();
+  GlobalKey<RefreshIndicatorState> keyRefresh;
+  Widget listView;
 
   @override
   void initState() {
     super.initState();
+
     keyRefresh = new GlobalKey<RefreshIndicatorState>();
     listView = list();
   }
@@ -89,8 +95,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  GlobalKey<RefreshIndicatorState> keyRefresh;
-
   Widget list() {
     return FutureBuilder(
       future: JsonManager.getStore(),
@@ -110,10 +114,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget listView;
-
   Future<void> refresh() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 650));
     setState(() {
       listView = list();
     });
