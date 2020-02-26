@@ -473,11 +473,22 @@ class _ListPageState extends State<ListPage> {
         content: Column(
           children: <Widget>[
             TextField(
+              style: new TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black),
               controller: nameController,
               decoration: InputDecoration(
                   icon: Icon(Icons.account_circle),
                   labelText: 'Nome: ',
-                  hintText: 'Mario'),
+                  hintText: 'Mario',
+                  labelStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  ),
+                  hintStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  ),
+                  helperStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  )),
               cursorColor: Colori.darkTheme ? Colors.white : Colors.black,
             ),
           ],
@@ -638,7 +649,7 @@ class _ListPageState extends State<ListPage> {
                         if (phone == '00000000000') {
                           Fluttertoast.showToast(
                               msg:
-                                  "Prima di chiamare bisogna selezionare una pizzeria",
+                                  "Prima di ordinare bisogna selezionare una pizzeria",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIos: 1,
@@ -646,12 +657,11 @@ class _ListPageState extends State<ListPage> {
                               textColor: Colors.black,
                               fontSize: 16.0);
                         } else {
-                          //SharedManager.setOrder(n + 1);
                           var method = await SharedManager.getMethod();
                           if (method == 'null') {
                             Fluttertoast.showToast(
                                 msg:
-                                    "Prima di chiamare bisogna selezionare una pizzeria",
+                                    "Prima di ordinare bisogna selezionare una pizzeria",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                                 timeInSecForIos: 1,
@@ -686,11 +696,22 @@ class _ListPageState extends State<ListPage> {
                             var user = await SharedManager.getNameFromShared();
                             if (user == 'User') {
                               showAlert();
+                              Fluttertoast.showToast(
+                                  msg:
+                                      "Una volta inserito il nome potrai ordinare tramite messaggio",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIos: 1,
+                                  backgroundColor: Colors.white,
+                                  textColor: Colors.black,
+                                  fontSize: 16.0);
+                            } else {
+                              msg += user;
+                              sms.setMessage(msg);
+                              sms.setRecipents([phone]);
+                              sms.sendSMS();
+                              SharedManager.setOrder(n + 1);
                             }
-                            msg += user;
-                            sms.setMessage(msg);
-                            sms.setRecipents([phone]);
-                            sms.sendSMS();
                           }
                         }
                       },

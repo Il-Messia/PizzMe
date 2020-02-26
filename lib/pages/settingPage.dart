@@ -4,7 +4,7 @@
   Description: Simple app created through the Flutter framework. It allows the 
                ordering of pizzas for takeaway by message or call.
  ------------------------------------------------------------------------------*/
- /*-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
   ------------------------------------------------------------------------------*/
 
 import 'package:flutter/material.dart';
@@ -125,11 +125,22 @@ class _SettingPageState extends State<SettingPage> {
         content: Column(
           children: <Widget>[
             TextField(
+              style: new TextStyle(
+                  color: Colori.darkTheme ? Colors.white : Colors.black),
               controller: nameController,
               decoration: InputDecoration(
                   icon: Icon(Icons.account_circle),
                   labelText: 'Nome: ',
-                  hintText: 'Mario'),
+                  hintText: 'Mario',
+                  labelStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  ),
+                  hintStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  ),
+                  helperStyle: TextStyle(
+                    color: Colori.darkTheme ? Colors.white : Colors.black,
+                  )),
               cursorColor: Colori.darkTheme ? Colors.white : Colors.black,
             ),
           ],
